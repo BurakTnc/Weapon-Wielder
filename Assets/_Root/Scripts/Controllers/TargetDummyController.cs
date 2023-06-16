@@ -28,8 +28,8 @@ namespace _Root.Scripts.Controllers
             transform.DOShakeRotation(hitAnimationLength, Vector3.back * 35, 5, 100);
             
             var partsCount = transform.childCount;
-            var r = Random.Range(0, 2);
-            var canWreck = r < 1;
+            var r = Random.Range(5, 10);
+            var canWreck = true;//r < 1;
             if (partsCount <= 0 || !canWreck)
                 return;
 
@@ -39,7 +39,13 @@ namespace _Root.Scripts.Controllers
             selectedPart.SetParent(null);
             if (selectedPart.TryGetComponent(out Rigidbody rb))
             {
-                rb.constraints = RigidbodyConstraints.None;
+                rb.isKinematic = false;
+            }
+
+            if (selectedPart.TryGetComponent(out BoxCollider coll))
+            {
+                coll.enabled = true;
+
             }
 
             Destroy(selectedPart.gameObject, 3);
