@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,10 +9,11 @@ namespace _Root.Scripts.Controllers
     {
         [SerializeField] private float health;
 
+        private readonly List<GameObject> _throwedPieces = new List<GameObject>();
         private bool _hasExploded;
         
 
-        public void GetHit(int damage,Vector3 impactPoint,float hitAnimationLength)
+        public void GetHit(float damage,Vector3 impactPoint,float hitAnimationLength)
         {
             ThrowPieces(hitAnimationLength);
 
@@ -28,8 +30,9 @@ namespace _Root.Scripts.Controllers
             transform.DOShakeRotation(hitAnimationLength, Vector3.back * 35, 5, 100);
             
             var partsCount = transform.childCount;
-            var r = Random.Range(5, 10);
-            var canWreck = true;//r < 1;
+            var r = Random.Range(0, 2);
+            var canWreck = r < 1;
+            
             if (partsCount <= 0 || !canWreck)
                 return;
 
@@ -39,6 +42,7 @@ namespace _Root.Scripts.Controllers
             selectedPart.SetParent(null);
             if (selectedPart.TryGetComponent(out Rigidbody rb))
             {
+                rb.constraints = RigidbodyConstraints.None;
                 rb.isKinematic = false;
             }
 
@@ -61,34 +65,31 @@ namespace _Root.Scripts.Controllers
             
             if(partsCount<1)
                 return;
-            
+
             for (var i = 0; i < partsCount; i++)
             {
-                if (transform.childCount < 1) 
-                    break;
-                
-                var index = i;
-                if (i<1)
-                {
-                    index = 0;
-                }
-                else
-                {
-                    index = i-1;
-                }
-                var selectedPart = transform.GetChild(transform.childCount-1);
-                
-                selectedPart.SetParent(null);
+                _throwedPieces.Add(transform.GetChild(i).gameObject);
+            }
+
+            foreach (var selectedPart in _throwedPieces)
+            {
+                selectedPart.transform.SetParent(null);
                 if (selectedPart.TryGetComponent(out Rigidbody rb))
                 {
                     rb.constraints = RigidbodyConstraints.None;
-                    rb.AddExplosionForce(5, impactPoint, 1, .2f, ForceMode.VelocityChange);
+                    rb.isKinematic = false;
+                    rb.AddExplosionForce(5, impactPoint, 30, .1f,ForceMode.VelocityChange);
                 }
 
-                SpawnThePotion();
+                if (selectedPart.TryGetComponent(out BoxCollider coll))
+                {
+                    coll.enabled = true;
+
+                }
                 Destroy(selectedPart.gameObject, 3);
-                Destroy(gameObject);
             }
+            SpawnThePotion();
+            Destroy(gameObject);
         }
 
         private void SpawnThePotion()

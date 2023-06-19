@@ -23,7 +23,7 @@ namespace _Root.Scripts.Controllers
 
         private float _fireRate;
         private float _range;
-        private int _damage;
+        private float _damage;
         private int _weaponLevel;
         private int _xp;
         private float _shootTimer;
@@ -88,7 +88,7 @@ namespace _Root.Scripts.Controllers
             get => _range;
             set => _range += value;
         }
-        public int Damage
+        public float Damage
         {
             get => _damage;
             set => _damage += value;

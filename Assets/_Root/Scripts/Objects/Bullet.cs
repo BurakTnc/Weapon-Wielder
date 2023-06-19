@@ -8,14 +8,14 @@ namespace _Root.Scripts.Objects
     public class Bullet : MonoBehaviour
     {
         private Rigidbody _rb;
-        private int _damage;
+        private float _damage;
         private float _fireRate;
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
         }
 
-        public void Fire(float speed,float range,int damage,float fireRate)
+        public void Fire(float speed,float range,float damage,float fireRate)
         {
             _damage = damage;
             _fireRate = fireRate;

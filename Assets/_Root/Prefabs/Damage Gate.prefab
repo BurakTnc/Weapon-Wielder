@@ -56,6 +56,7 @@ MonoBehaviour:
   range: 0
   damage: 0
   mainPotion: {fileID: 0}
+  headlineText: {fileID: 4419665417476907220}
 --- !u!65 &8493308003284246438
 BoxCollider:
   m_ObjectHideFlags: 0

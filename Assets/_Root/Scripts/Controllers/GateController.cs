@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using _Root.Scripts.Enums;
 using _Root.Scripts.Signals;
 using DG.Tweening;
@@ -14,15 +15,18 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private float goDownDuration;
         [SerializeField] private float fireRate;
         [SerializeField] private float range;
-        [SerializeField] private int damage;
+        [SerializeField] private float damage;
         [SerializeField] private GameObject mainPotion;
+        [SerializeField] private TextMeshPro headlineText;
 
         private ShooterController _shooterController;
+        private BoxCollider _boxCollider;
         private int _xp;
 
         private void Awake()
         {
             _shooterController = GameObject.Find("Player").GetComponent<ShooterController>();
+            _boxCollider = GetComponent<BoxCollider>();
         }
 
         private void Start()
@@ -35,13 +39,13 @@ namespace _Root.Scripts.Controllers
             switch (gateMode)
             {
                 case GateMode.FireRate:
-                    fireRate += 0.1f;
+                    fireRate += 00.1f;
                     break;
                 case GateMode.Damage:
-                    damage += 1;
+                    damage += 0.1f;
                     break;
                 case GateMode.Range:
-                    range += 1f;
+                    range += 0.1f;
                     break;
                 case GateMode.LevelUp:
                     break;
@@ -56,13 +60,13 @@ namespace _Root.Scripts.Controllers
             switch (gateMode)
             {
                 case GateMode.FireRate:
-                    _shooterController.FireRate = fireRate/10;
+                    _shooterController.FireRate = fireRate/100;
                     break;
                 case GateMode.Damage:
                     _shooterController.Damage = damage;
                     break;
                 case GateMode.Range:
-                    _shooterController.Range = range/10;
+                    _shooterController.Range = range/20;
                     break;
                 case GateMode.LevelUp:
                     LevelSignals.Instance.OnXpClaimed?.Invoke(_xp);
@@ -70,6 +74,8 @@ namespace _Root.Scripts.Controllers
                 default:
                     break;
             }
+
+            _boxCollider.enabled = false;
             transform.DOMoveY(-5, goDownDuration).SetEase(Ease.InBack);
         }
 
@@ -84,13 +90,19 @@ namespace _Root.Scripts.Controllers
             switch (gateMode)
             {
                 case GateMode.FireRate:
-                    gateText.text = "+" +(fireRate).ToString("0.0");
-                    break;
+                    var signFire = Mathf.Sign(fireRate) > 0 ? "+" : "";
+                    headlineText.text = "FIRE RATE";
+                    gateText.text = signFire +fireRate.ToString("0.0");
+                    break; 
                 case GateMode.Damage:
-                    gateText.text = "+" + damage;
+                    var signDamage = Mathf.Sign(damage) > 0 ? "+" : "";
+                    headlineText.text = "DAMAGE";
+                    gateText.text =signDamage + (damage*10).ToString("0");
                     break;
                 case GateMode.Range:
-                    gateText.text = "+" + range;
+                    var signRange = Mathf.Sign(range) > 0 ? "+" : "";
+                    headlineText.text = "RANGE";
+                    gateText.text = signRange + range.ToString("0.0");
                     break;
                 case GateMode.LevelUp:
                     break;

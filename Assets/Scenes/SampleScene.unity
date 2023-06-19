@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.180503, g: 0.22597742, b: 0.3070451, a: 1}
+  m_IndirectSpecularColor: {r: 0.18050298, g: 0.22597735, b: 0.30704513, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3987,14 +3987,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 3, z: -5.75}
+  m_LocalRotation: {x: 0.08641016, y: -0.13002956, z: 0.011376116, w: 0.9876721}
+  m_LocalPosition: {x: 1.7, y: 3, z: -5.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: -15, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4430,7 +4430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8233569382121516837, guid: 236a5369c70924a3ba0a547629c517f4, type: 3}
       propertyPath: fireRate
-      value: 3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8233569382121516837, guid: 236a5369c70924a3ba0a547629c517f4, type: 3}
       propertyPath: gateMode
@@ -6835,9 +6835,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4419665416028448020, guid: 236a5369c70924a3ba0a547629c517f4, type: 3}
+      propertyPath: m_text
+      value: '
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419665416028448020, guid: 236a5369c70924a3ba0a547629c517f4, type: 3}
+      propertyPath: m_fontSize
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8233569382121516837, guid: 236a5369c70924a3ba0a547629c517f4, type: 3}
       propertyPath: range
-      value: 5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8233569382121516837, guid: 236a5369c70924a3ba0a547629c517f4, type: 3}
       propertyPath: gateMode
