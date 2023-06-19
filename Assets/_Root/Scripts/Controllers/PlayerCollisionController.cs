@@ -13,6 +13,10 @@ namespace _Root.Scripts.Controllers
             {
                 gate.Selection();
             }
+            if (other.gameObject.TryGetComponent(out BonusDummyController dummy))
+            {
+                CoreGameSignals.Instance.OnLevelComplete?.Invoke();
+            }
 
             if (other.gameObject.CompareTag("Finish"))
             {

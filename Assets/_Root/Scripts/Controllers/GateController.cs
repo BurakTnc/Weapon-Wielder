@@ -19,12 +19,14 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private GameObject mainPotion;
         [SerializeField] private TextMeshPro headlineText;
 
+        private GateVisuals _gateVisuals;
         private ShooterController _shooterController;
         private BoxCollider _boxCollider;
         private int _xp;
 
         private void Awake()
         {
+            _gateVisuals = GetComponent<GateVisuals>();
             _shooterController = GameObject.Find("Player").GetComponent<ShooterController>();
             _boxCollider = GetComponent<BoxCollider>();
         }
@@ -40,11 +42,14 @@ namespace _Root.Scripts.Controllers
             {
                 case GateMode.FireRate:
                     fireRate += 00.1f;
+                    _gateVisuals.SetGateColor(fireRate>=0);
                     break;
                 case GateMode.Damage:
                     damage += 0.1f;
+                    _gateVisuals.SetGateColor(damage>=0);
                     break;
                 case GateMode.Range:
+                    _gateVisuals.SetGateColor(range>=0);
                     range += 0.1f;
                     break;
                 case GateMode.LevelUp:

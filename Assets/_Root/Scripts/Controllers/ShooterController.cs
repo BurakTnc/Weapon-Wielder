@@ -80,7 +80,7 @@ namespace _Root.Scripts.Controllers
             set
             {
                 _fireRate -= value;
-                _fireRate = Mathf.Clamp(_fireRate, 0, 2);
+                _fireRate = Mathf.Clamp(_fireRate, 0.03f, 2);
             } 
         }
         public float Range

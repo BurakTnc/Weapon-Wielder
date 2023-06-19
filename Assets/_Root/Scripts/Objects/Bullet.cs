@@ -36,6 +36,11 @@ namespace _Root.Scripts.Objects
                 gate.IncreaseGateStats();
                 Destroy(gameObject);
             }
+            if (other.gameObject.TryGetComponent(out BonusDummyController bonusDummy))
+            {
+                bonusDummy.GetHit(_damage,transform.position,_fireRate);
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -44,6 +44,7 @@ namespace _Root.Scripts.Controllers
             {
                 rb.constraints = RigidbodyConstraints.None;
                 rb.isKinematic = false;
+                rb.AddExplosionForce(5, transform.position, 30, 0f,ForceMode.VelocityChange);
             }
 
             if (selectedPart.TryGetComponent(out BoxCollider coll))

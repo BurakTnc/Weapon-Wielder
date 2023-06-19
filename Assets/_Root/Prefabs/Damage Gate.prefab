@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4419665415911593993}
   - component: {fileID: 8233569382121516837}
   - component: {fileID: 8493308003284246438}
+  - component: {fileID: 7621820411956917225}
   m_Layer: 0
   m_Name: Damage Gate
   m_TagString: Untagged
@@ -70,6 +71,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.69, z: 1}
   m_Center: {x: 0, y: 0, z: 0.39}
+--- !u!114 &7621820411956917225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419665415911593992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5b270b489943fb8f4b4f366f124bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redSprite: {fileID: 21300000, guid: ace16d6fe8eb342c4b82caf02659926a, type: 3}
+  greenSprite: {fileID: 21300000, guid: 1f85b165a8de84a7390f7910e9dfb9d1, type: 3}
+  greenMaterial: {fileID: 2100000, guid: 3619cffa8bcc24a4282b83a278a4b8d5, type: 2}
+  redMaterial: {fileID: 2100000, guid: 158586ece554e4bac99431d569e33691, type: 2}
+  cylinders:
+  - {fileID: 4419665417639324955}
+  - {fileID: 4419665417518546717}
+  - {fileID: 4419665415926278309}
+  spriteRenderer: {fileID: 4419665416775130236}
 --- !u!1 &4419665415926278362
 GameObject:
   m_ObjectHideFlags: 0
