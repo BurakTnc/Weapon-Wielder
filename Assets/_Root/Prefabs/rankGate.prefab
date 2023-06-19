@@ -156,7 +156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5010389560905012757, guid: 66a65602e466146ce8df21d40b46cf41, type: 2}
+  - {fileID: 2100000, guid: 5a848b86c14b246279b17e92df5f0aa2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_text: RANK UP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 66a65602e466146ce8df21d40b46cf41, type: 2}
-  m_sharedMaterial: {fileID: 5010389560905012757, guid: 66a65602e466146ce8df21d40b46cf41, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 5a848b86c14b246279b17e92df5f0aa2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -384,7 +384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1955908453925123441
 Transform:
   m_ObjectHideFlags: 0
@@ -509,6 +509,7 @@ MonoBehaviour:
   range: 0
   damage: 0
   mainPotion: {fileID: 7989520040280913696}
+  headlineText: {fileID: 0}
 --- !u!65 &4461177190689506747
 BoxCollider:
   m_ObjectHideFlags: 0

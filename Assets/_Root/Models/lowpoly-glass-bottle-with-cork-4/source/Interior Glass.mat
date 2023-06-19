@@ -10,8 +10,7 @@ Material:
   m_Name: Interior Glass
   m_Shader: {fileID: 4800000, guid: f8d49205b3b0a644195633020367689d, type: 3}
   m_ValidKeywords:
-  - TCP2_DISABLE_WRAPPED_LIGHT
-  - _ALPHAPREMULTIPLY_ON
+  - _ALPHABLEND_ON
   - _EMISSION
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -75,7 +74,7 @@ Material:
     - _Glossiness: 0.59999996
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _Mode: 3
+    - _Mode: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RampSmooth: 0.838
@@ -88,8 +87,8 @@ Material:
     - _SpecBlend: 1
     - _SpecSmooth: 1
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _TCP2_DISABLE_WRAPPED_LIGHT: 1
+    - _SrcBlend: 5
+    - _TCP2_DISABLE_WRAPPED_LIGHT: 0
     - _TCP2_RAMPTEXT: 0
     - _TCP2_SPEC_TOON: 0
     - _TCP2_STYLIZED_FRESNEL: 0
