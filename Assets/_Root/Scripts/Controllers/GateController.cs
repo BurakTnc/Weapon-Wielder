@@ -41,7 +41,7 @@ namespace _Root.Scripts.Controllers
             switch (gateMode)
             {
                 case GateMode.FireRate:
-                    fireRate += 00.1f;
+                    fireRate += 0.1f;
                     _gateVisuals.SetGateColor(fireRate>=0);
                     break;
                 case GateMode.Damage:
@@ -97,7 +97,7 @@ namespace _Root.Scripts.Controllers
                 case GateMode.FireRate:
                     var signFire = Mathf.Sign(fireRate) > 0 ? "+" : "";
                     headlineText.text = "FIRE RATE";
-                    gateText.text = signFire +fireRate.ToString("0.0");
+                    gateText.text = signFire +(fireRate*10).ToString("0");
                     break; 
                 case GateMode.Damage:
                     var signDamage = Mathf.Sign(damage) > 0 ? "+" : "";
