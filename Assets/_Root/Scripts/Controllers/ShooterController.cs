@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Root.Scripts.Enums;
 using _Root.Scripts.Managers;
 using _Root.Scripts.Objects;
 using _Root.Scripts.Signals;
@@ -128,13 +129,13 @@ namespace _Root.Scripts.Controllers
         {
             for (var i = 0; i < _weaponLevel+1; i++)
             {
-                var bullet = Instantiate(Resources.Load<GameObject>("Spawnables/Bullet")).transform;
+                var bullet = PoolManager.Instance.GetPooledObject(PooledObjectType.Bullet);
 
-                bullet.position = shootingPositions[i].position;
+                bullet.transform.position = shootingPositions[i].position;
                 
-                if (bullet.gameObject.TryGetComponent(out Bullet script))
+                if (bullet.gameObject.TryGetComponent(out Bullet firedBullet))
                 {
-                    script.Fire(bulletSpeed, Range, Damage, FireRate);
+                    firedBullet.Fire(bulletSpeed, Range, Damage, FireRate);
                 }
             }
         }

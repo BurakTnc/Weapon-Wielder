@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using _Root.Scripts.Controllers;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,7 +21,13 @@ namespace _Root.Scripts.Objects
             _damage = damage;
             _fireRate = fireRate;
             _rb.velocity = Vector3.forward * speed;
-            Destroy(gameObject,range);
+            StartCoroutine(KillTheBullet(range));
+        }
+
+        private IEnumerator KillTheBullet(float range)
+        {
+            yield return new WaitForSeconds(range);
+            gameObject.SetActive(false);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -28,18 +35,18 @@ namespace _Root.Scripts.Objects
             if (other.gameObject.TryGetComponent(out TargetDummyController dummy))
             {
                 dummy.GetHit(_damage,transform.position,_fireRate);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
 
             if (other.gameObject.TryGetComponent(out GateController gate))
             {
                 gate.IncreaseGateStats();
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
             if (other.gameObject.TryGetComponent(out BonusDummyController bonusDummy))
             {
                 bonusDummy.GetHit(_damage,transform.position,_fireRate);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
