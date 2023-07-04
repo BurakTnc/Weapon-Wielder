@@ -9,7 +9,7 @@ namespace _Root.Scripts.Signals
         public static LevelSignals Instance;
         
         public UnityAction<int> OnXpClaimed = delegate { };
-        public UnityAction OnLevelUp = delegate { };
+        public UnityAction<Transform> OnNewGangMember = delegate { };
 
         private void Awake()
         {

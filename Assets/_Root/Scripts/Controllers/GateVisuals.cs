@@ -16,7 +16,7 @@ namespace _Root.Scripts.Controllers
             {
                 foreach (var obj in cylinders)
                 {
-                    obj.material.DOColor(greenMaterial.color, .3f).SetEase(Ease.InSine);
+                    obj.material.DOColor(greenMaterial.color, .2f).SetEase(Ease.InSine);
                 }
 
                 spriteRenderer.sprite = greenSprite;
@@ -25,7 +25,7 @@ namespace _Root.Scripts.Controllers
             {
                 foreach (var obj in cylinders)
                 {
-                    obj.material.DOColor(redMaterial.color, .3f).SetEase(Ease.InSine);
+                    obj.material.DOColor(redMaterial.color, .2f).SetEase(Ease.InSine);
                 }
 
                 spriteRenderer.sprite = redSprite;

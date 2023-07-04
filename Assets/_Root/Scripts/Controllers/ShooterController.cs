@@ -3,29 +3,26 @@ using System.Collections.Generic;
 using _Root.Scripts.Enums;
 using _Root.Scripts.Managers;
 using _Root.Scripts.Objects;
+using _Root.Scripts.ScriptableObjects;
 using _Root.Scripts.Signals;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 namespace _Root.Scripts.Controllers
 {
     public class ShooterController : MonoBehaviour
     {
-        [SerializeField] private GameObject[] weapons;
-        
-        [Header("Shooting Positions")] 
-        [SerializeField] private List<Transform> shootingPositions = new List<Transform>();
-
-        [Header("Default Values")]
-        [SerializeField] private float defaultFireRate;
-        [SerializeField] private float defaultRange;
-        [SerializeField] private int defaultDamage;
-        [SerializeField] private float bulletSpeed;
+        [SerializeField] private GameObject[] soldiers;
+        [SerializeField] private SoldierData soldierData;
+        [SerializeField] private Transform shootingPosition;
+        [SerializeField] private bool isCollectible;
 
         private float _fireRate;
         private float _range;
         private float _damage;
-        private int _weaponLevel;
+        private int _soldierLevel;
         private int _xp;
         private float _shootTimer;
         private bool _isRunning;
@@ -56,13 +53,15 @@ namespace _Root.Scripts.Controllers
 
         private void Start()
         {
-            _fireRate = defaultFireRate;
-            _range = defaultRange;
-            _damage = defaultDamage;
+            _fireRate = soldierData.fireRate;
+            _range = soldierData.range;
+            _damage = soldierData.damage;
         }
 
         private void Update()
         {
+            if(isCollectible)
+                return;
             BeginFire();
         }
 
@@ -101,7 +100,7 @@ namespace _Root.Scripts.Controllers
             set
             {
                 _xp += value;
-                if (_xp >= 100) 
+                if (_xp >= 0) 
                 {
                     LevelUp();
                 }
@@ -127,15 +126,15 @@ namespace _Root.Scripts.Controllers
 
         private void Fire()
         {
-            for (var i = 0; i < _weaponLevel+1; i++)
+            for (var i = 0; i < _soldierLevel+1; i++)
             {
                 var bullet = PoolManager.Instance.GetPooledObject(PooledObjectType.Bullet);
 
-                bullet.transform.position = shootingPositions[i].position;
+                bullet.transform.position = shootingPosition.position;
                 
                 if (bullet.gameObject.TryGetComponent(out Bullet firedBullet))
                 {
-                    firedBullet.Fire(bulletSpeed, Range, Damage, FireRate);
+                    firedBullet.Fire(7, Range, Damage, FireRate);
                 }
             }
         }
@@ -148,25 +147,58 @@ namespace _Root.Scripts.Controllers
 
         private void LevelUp()
         {
-            _xp -= 100;
-            _weaponLevel++;
-            ChangeWeapon();
-            LevelSignals.Instance.OnLevelUp?.Invoke();
+            _xp = 0;
+            _soldierLevel++;
+            ChangeSoldier();
             UIManager.Instance.UpdateXp(_xp);
         }
 
-        private void ChangeWeapon()
+        private void ChangeSoldier()
         {
-            foreach (var weapon in weapons)
+            var chance = Random.Range(0, 2);
+            if(chance>0)
+                return;
+            
+            for (var i = 0; i < soldiers.Length; i++)
             {
-                weapon.SetActive(false);
+                if (i == _soldierLevel - 1)
+                {
+                    soldiers[i].SetActive(false);
+                }
+                else
+                {
+                    soldiers[i].SetActive(false);
+                }
+                
             }
-
-            var current = weapons[_weaponLevel];
+            
+            var current = soldiers[_soldierLevel];
             var scale = current.transform.localScale;
             current.transform.localScale=Vector3.zero;
             current.SetActive(true);
-            current.transform.DOScale(scale, .3f).SetEase(Ease.OutBack);
+            current.transform.DOScale(scale, .5f).SetEase(Ease.OutBack);
+            current.GetComponent<ShooterController>().Activate();
+            //transform.gameObject.SetActive(false);
+        }
+
+        public void Activate()
+        {
+            transform.tag = "Untagged";
+            isCollectible = false;
+            OnGameStart();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.TryGetComponent(out GateController gate))
+            {
+                gate.Selection(this);
+            }
+
+            if (other.gameObject.CompareTag("Soldier"))
+            {
+                LevelSignals.Instance.OnNewGangMember?.Invoke(other.transform.root);
+            }
         }
     }
 }

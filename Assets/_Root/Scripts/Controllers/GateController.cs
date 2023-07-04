@@ -19,15 +19,14 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private GameObject mainPotion;
         [SerializeField] private TextMeshPro headlineText;
 
+        private bool _isLocked;
         private GateVisuals _gateVisuals;
-        private ShooterController _shooterController;
         private BoxCollider _boxCollider;
         private int _xp;
 
         private void Awake()
         {
             _gateVisuals = GetComponent<GateVisuals>();
-            _shooterController = GameObject.Find("Player").GetComponent<ShooterController>();
             _boxCollider = GetComponent<BoxCollider>();
         }
 
@@ -38,6 +37,8 @@ namespace _Root.Scripts.Controllers
 
         public void IncreaseGateStats()
         {
+            if(_isLocked)
+                return;
             switch (gateMode)
             {
                 case GateMode.FireRate:
@@ -60,28 +61,34 @@ namespace _Root.Scripts.Controllers
             UpdateInterface();
         }
 
-        public void Selection()
+        public void Selection(ShooterController shooterController)
         {
+            _isLocked = true;
             switch (gateMode)
             {
                 case GateMode.FireRate:
-                    _shooterController.FireRate = fireRate/100;
+                    Debug.Log("firerate");
+                    shooterController.FireRate = fireRate/100;
                     break;
                 case GateMode.Damage:
-                    _shooterController.Damage = damage;
+                    Debug.Log("damage");
+                    shooterController.Damage = damage;
                     break;
                 case GateMode.Range:
-                    _shooterController.Range = range/20;
+                    Debug.Log("range");
+                    shooterController.Range = range/20;
                     break;
                 case GateMode.LevelUp:
                     LevelSignals.Instance.OnXpClaimed?.Invoke(_xp);
+                    _boxCollider.enabled = false;
+                    transform.DOMoveY(-5, goDownDuration).SetEase(Ease.InBack);
                     break;
                 default:
                     break;
             }
 
-            _boxCollider.enabled = false;
-            transform.DOMoveY(-5, goDownDuration).SetEase(Ease.InBack);
+           // _boxCollider.enabled = false;
+           
         }
 
         public void CollectPotion()

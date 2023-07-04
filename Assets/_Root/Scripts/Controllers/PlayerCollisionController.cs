@@ -9,10 +9,6 @@ namespace _Root.Scripts.Controllers
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out GateController gate))
-            {
-                gate.Selection();
-            }
             if (other.gameObject.TryGetComponent(out BonusDummyController dummy))
             {
                 CoreGameSignals.Instance.OnLevelComplete?.Invoke();
