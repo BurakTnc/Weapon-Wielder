@@ -15,7 +15,7 @@ namespace _Root.Scripts.Controllers
     public class ShooterController : MonoBehaviour
     {
         [SerializeField] private GameObject[] soldiers;
-        [SerializeField] private SoldierData soldierData;
+        [SerializeField] private SoldierData[] soldierData;
         [SerializeField] private Transform shootingPosition;
         [SerializeField] private bool isCollectible;
 
@@ -26,6 +26,12 @@ namespace _Root.Scripts.Controllers
         private int _xp;
         private float _shootTimer;
         private bool _isRunning;
+        private GangController _gangController;
+
+        private void Awake()
+        {
+            _gangController = transform.root.GetComponent<GangController>();
+        }
 
         private void OnEnable()
         {
@@ -42,6 +48,7 @@ namespace _Root.Scripts.Controllers
             CoreGameSignals.Instance.OnGameStart -= OnGameStart;
             CoreGameSignals.Instance.OnLevelComplete -= OnGameEnd;
             LevelSignals.Instance.OnXpClaimed -= CollectXp;
+            LevelSignals.Instance.OnStop -= OnGameEnd;
         }
 
         private void Subscribe()
@@ -49,13 +56,14 @@ namespace _Root.Scripts.Controllers
             CoreGameSignals.Instance.OnGameStart += OnGameStart;
             CoreGameSignals.Instance.OnLevelComplete += OnGameEnd;
             LevelSignals.Instance.OnXpClaimed += CollectXp;
+            LevelSignals.Instance.OnStop += OnGameEnd;
         }
 
         private void Start()
         {
-            _fireRate = soldierData.fireRate;
-            _range = soldierData.range;
-            _damage = soldierData.damage;
+            _fireRate = soldierData[0].fireRate;
+            _range = soldierData[0].range;
+            _damage = soldierData[0].damage;
         }
 
         private void Update()
@@ -147,6 +155,9 @@ namespace _Root.Scripts.Controllers
 
         private void LevelUp()
         {
+            var chance = Random.Range(0, 2);
+            if(chance>0)
+                return;
             _xp = 0;
             _soldierLevel++;
             ChangeSoldier();
@@ -155,30 +166,18 @@ namespace _Root.Scripts.Controllers
 
         private void ChangeSoldier()
         {
-            var chance = Random.Range(0, 2);
-            if(chance>0)
-                return;
-            
+
             for (var i = 0; i < soldiers.Length; i++)
             {
-                if (i == _soldierLevel - 1)
-                {
-                    soldiers[i].SetActive(false);
-                }
-                else
-                {
-                    soldiers[i].SetActive(false);
-                }
-                
+                soldiers[i].SetActive(i == _soldierLevel);
             }
             
             var current = soldiers[_soldierLevel];
             var scale = current.transform.localScale;
             current.transform.localScale=Vector3.zero;
-            current.SetActive(true);
+           // current.SetActive(true);
             current.transform.DOScale(scale, .5f).SetEase(Ease.OutBack);
-            current.GetComponent<ShooterController>().Activate();
-            //transform.gameObject.SetActive(false);
+           // current.GetComponent<ShooterController>().Activate();
         }
 
         public void Activate()
@@ -198,6 +197,10 @@ namespace _Root.Scripts.Controllers
             if (other.gameObject.CompareTag("Soldier"))
             {
                 LevelSignals.Instance.OnNewGangMember?.Invoke(other.transform.root);
+            }
+            if (other.gameObject.CompareTag("Finish"))
+            {
+                //LevelSignals.Instance.OnGrid?.Invoke(_gangController.GetGangList());
             }
         }
     }

@@ -7,6 +7,14 @@ namespace _Root.Scripts.Controllers
 {
     public class PlayerCollisionController : MonoBehaviour
     {
+
+        private GangController _gangController;
+
+        private void Awake()
+        {
+            _gangController = GetComponent<GangController>();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.TryGetComponent(out BonusDummyController dummy))
@@ -16,7 +24,9 @@ namespace _Root.Scripts.Controllers
 
             if (other.gameObject.CompareTag("Finish"))
             {
-                CoreGameSignals.Instance.OnLevelComplete?.Invoke();
+                LevelSignals.Instance.OnGrid?.Invoke(_gangController.GetGangList());
+                LevelSignals.Instance.OnStop?.Invoke();
+                
             }
         }
     }

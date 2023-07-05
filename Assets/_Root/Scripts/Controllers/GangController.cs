@@ -9,6 +9,7 @@ namespace _Root.Scripts.Controllers
     public class GangController : MonoBehaviour
     {
         [SerializeField] private List<Transform> soldierPositions = new List<Transform>();
+        [SerializeField] private List<GameObject> soldiers = new List<GameObject>();
 
         private int _gangSize;
 
@@ -34,9 +35,11 @@ namespace _Root.Scripts.Controllers
 
         private void AddNewSoldier(Transform newSoldier)
         {
+            var shooterComp = newSoldier.GetComponent<ShooterController>();
+            
             newSoldier.SetParent(transform);
-            // rotate
-            var shooterComp = newSoldier.GetChild(0).GetComponent<ShooterController>();
+            soldiers.Add(newSoldier.gameObject);
+            newSoldier.DORotate(Vector3.zero, 1);
             newSoldier.DOLocalMove(soldierPositions[_gangSize].localPosition, 1).SetEase(Ease.OutSine)
                 .OnComplete(() => ActivateSoldier(shooterComp));
             _gangSize++;
@@ -45,6 +48,11 @@ namespace _Root.Scripts.Controllers
         private void ActivateSoldier(ShooterController shooter)
         {
             shooter.Activate();
+        }
+
+        public List<GameObject> GetGangList()
+        {
+            return soldiers;
         }
     }
 }

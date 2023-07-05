@@ -36,12 +36,12 @@ namespace _Root.Scripts.Managers
 
         private void UnSubscribe()
         {
-            CoreGameSignals.Instance.OnLevelComplete -= Completed;
+            //CoreGameSignals.Instance.OnLevelComplete -= Completed;
         }
 
         private void Subscribe()
         {
-            CoreGameSignals.Instance.OnLevelComplete += Completed;
+           // CoreGameSignals.Instance.OnLevelComplete += Completed;
         }
 
         private void Completed()

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +11,8 @@ namespace _Root.Scripts.Signals
         
         public UnityAction<int> OnXpClaimed = delegate { };
         public UnityAction<Transform> OnNewGangMember = delegate { };
+        public UnityAction<List<GameObject>> OnGrid = delegate { };
+        public UnityAction OnStop = delegate { };
 
         private void Awake()
         {

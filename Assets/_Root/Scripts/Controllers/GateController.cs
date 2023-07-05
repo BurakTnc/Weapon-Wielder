@@ -67,15 +67,12 @@ namespace _Root.Scripts.Controllers
             switch (gateMode)
             {
                 case GateMode.FireRate:
-                    Debug.Log("firerate");
                     shooterController.FireRate = fireRate/100;
                     break;
                 case GateMode.Damage:
-                    Debug.Log("damage");
                     shooterController.Damage = damage;
                     break;
                 case GateMode.Range:
-                    Debug.Log("range");
                     shooterController.Range = range/20;
                     break;
                 case GateMode.LevelUp:

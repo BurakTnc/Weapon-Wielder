@@ -35,12 +35,14 @@ namespace _Root.Scripts.Controllers
        {
            CoreGameSignals.Instance.OnGameStart += OnGameStart;
            CoreGameSignals.Instance.OnLevelComplete += OnGameEnd;
+           LevelSignals.Instance.OnStop += OnGameEnd;
        }
 
        private void UnSubscribe()
        {
            CoreGameSignals.Instance.OnGameStart -= OnGameStart;
            CoreGameSignals.Instance.OnLevelComplete -= OnGameEnd;
+           LevelSignals.Instance.OnStop -= OnGameEnd;
        }
 
        #endregion
