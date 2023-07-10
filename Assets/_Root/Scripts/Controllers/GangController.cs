@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Root.Scripts.Enums;
 using _Root.Scripts.Signals;
 using DG.Tweening;
 using UnityEngine;
@@ -39,6 +40,7 @@ namespace _Root.Scripts.Controllers
             
             newSoldier.SetParent(transform);
             soldiers.Add(newSoldier.gameObject);
+            shooterComp.ChangeSoldierState(SoldierState.Run);
             newSoldier.DORotate(Vector3.zero, 1);
             newSoldier.DOLocalMove(soldierPositions[_gangSize].localPosition, 1).SetEase(Ease.OutSine)
                 .OnComplete(() => ActivateSoldier(shooterComp));

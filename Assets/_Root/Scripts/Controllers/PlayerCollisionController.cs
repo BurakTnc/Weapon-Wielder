@@ -24,8 +24,11 @@ namespace _Root.Scripts.Controllers
 
             if (other.gameObject.CompareTag("Finish"))
             {
+                var gridController = other.transform.root.GetComponent<GridController>();
+                
                 LevelSignals.Instance.OnGrid?.Invoke(_gangController.GetGangList());
                 LevelSignals.Instance.OnStop?.Invoke();
+                CameraSignals.Instance.OnMergeLook?.Invoke(gridController.GetMergePosition());
                 
             }
         }

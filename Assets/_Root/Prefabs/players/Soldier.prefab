@@ -4860,7 +4860,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: fa76c0936ab1749f3aedd844d9b2a9a0, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -5267,7 +5267,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: fa76c0936ab1749f3aedd844d9b2a9a0, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -5421,7 +5421,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: fa76c0936ab1749f3aedd844d9b2a9a0, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -6770,9 +6770,10 @@ GameObject:
   - component: {fileID: 3434582811217249211}
   - component: {fileID: 6101466048603874671}
   - component: {fileID: 8448423772856307565}
+  - component: {fileID: 1490997628}
   m_Layer: 0
   m_Name: Soldier
-  m_TagString: Soldier
+  m_TagString: Gang
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6786,7 +6787,7 @@ Transform:
   m_GameObject: {fileID: 6267075250488170873}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7773463210541063297}
@@ -6807,8 +6808,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.6306971
-  m_Height: 3.76
+  m_Radius: 0.45
+  m_Height: 3.13
   m_Direction: 1
   m_Center: {x: -0.00038646898, y: 0.61224455, z: 0.029046185}
 --- !u!114 &8448423772856307565
@@ -6823,6 +6824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6983d991a54b4006925b97931cca9220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMerge: 0
   soldiers:
   - {fileID: 6965717556223952443}
   - {fileID: 4936584518899656964}
@@ -6837,6 +6839,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7e7ad147108ee4cc7ad73dc0aeff3ee0, type: 2}
   shootingPosition: {fileID: 5761391388914334723}
   isCollectible: 0
+--- !u!114 &1490997628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267075250488170873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7349d165f19849338c42a2d00c388c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6273209653417356768
 GameObject:
   m_ObjectHideFlags: 0
@@ -7711,7 +7725,7 @@ GameObject:
   - component: {fileID: 4395741171295700731}
   m_Layer: 0
   m_Name: lv1
-  m_TagString: Soldier
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7747,7 +7761,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: fa76c0936ab1749f3aedd844d9b2a9a0, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

@@ -14,6 +14,8 @@ namespace _Root.Scripts.Controllers
 {
     public class ShooterController : MonoBehaviour
     {
+        [HideInInspector] public bool canMerge;
+        
         [SerializeField] private GameObject[] soldiers;
         [SerializeField] private SoldierData[] soldierData;
         [SerializeField] private Transform shootingPosition;
@@ -27,10 +29,17 @@ namespace _Root.Scripts.Controllers
         private float _shootTimer;
         private bool _isRunning;
         private GangController _gangController;
+        private Animator _animator;
+        private DragNDropController _dragNDropController;
+        
+        private static readonly int İsRunning = Animator.StringToHash("isRunning");
+        private static readonly int İsShooting = Animator.StringToHash("isShooting");
+        private static readonly int RunToGrid = Animator.StringToHash("RunToGrid");
 
         private void Awake()
         {
             _gangController = transform.root.GetComponent<GangController>();
+            _dragNDropController = GetComponent<DragNDropController>();
         }
 
         private void OnEnable()
@@ -64,6 +73,10 @@ namespace _Root.Scripts.Controllers
             _fireRate = soldierData[0].fireRate;
             _range = soldierData[0].range;
             _damage = soldierData[0].damage;
+            
+            if (isCollectible)
+                return;
+            ChangeSoldierState(SoldierState.Idle);
         }
 
         private void Update()
@@ -76,11 +89,15 @@ namespace _Root.Scripts.Controllers
         private void OnGameStart()
         {
             _isRunning = true;
+            if(isCollectible)
+                return;
+            ChangeSoldierState(SoldierState.Run);
         }
 
         private void OnGameEnd()
         {
             _isRunning = false;
+            ChangeSoldierState(SoldierState.Idle);
         }
         public float FireRate
         {
@@ -147,6 +164,37 @@ namespace _Root.Scripts.Controllers
             }
         }
 
+        public int GetSoldierLevel()
+        {
+            return _soldierLevel;
+        }
+        public void ChangeSoldierState(SoldierState state)
+        {
+            var animator = GetCurrentAnimator();
+            switch (state)
+            {
+                case SoldierState.Idle:
+                    animator.SetBool(İsRunning,false);
+                    break;
+                case SoldierState.Run:
+                    animator.SetBool(İsRunning,true);
+                    break;
+                case SoldierState.Shoot:
+                    animator.SetBool(İsShooting,true);
+                    break;
+                case SoldierState.RunToGrid:
+                    animator.SetTrigger(RunToGrid);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private Animator GetCurrentAnimator()
+        {
+            var animator = soldiers[_soldierLevel].GetComponent<Animator>();
+            return animator;
+        }
         private void CollectXp(int earnedXp)
         {
             Xp = earnedXp;
@@ -161,6 +209,7 @@ namespace _Root.Scripts.Controllers
             _xp = 0;
             _soldierLevel++;
             ChangeSoldier();
+            ChangeSoldierState(SoldierState.Run);
             UIManager.Instance.UpdateXp(_xp);
         }
 
@@ -182,7 +231,7 @@ namespace _Root.Scripts.Controllers
 
         public void Activate()
         {
-            transform.tag = "Untagged";
+            transform.tag = "Gang";
             isCollectible = false;
             OnGameStart();
         }
@@ -198,9 +247,15 @@ namespace _Root.Scripts.Controllers
             {
                 LevelSignals.Instance.OnNewGangMember?.Invoke(other.transform.root);
             }
-            if (other.gameObject.CompareTag("Finish"))
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.CompareTag("Grid"))
             {
-                //LevelSignals.Instance.OnGrid?.Invoke(_gangController.GetGangList());
+                if(!canMerge)
+                    return;
+                _dragNDropController.PlaceSoldier(other.transform.position);
             }
         }
     }
