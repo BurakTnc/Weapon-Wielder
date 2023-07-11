@@ -187,8 +187,8 @@ namespace _Root.Scripts.Controllers
                 
                 if (bullet.gameObject.TryGetComponent(out Bullet firedBullet))
                 {
-                    var rawDirection = transform.forward * (0.03f);
-                    var fightingDirection = transform.forward * (0.05f);
+                    var rawDirection = transform.forward * (0.04f);
+                    var fightingDirection = transform.forward * (0.07f);
                     var desiredDirection = _isAiming ? fightingDirection : rawDirection;
                     firedBullet.Fire(desiredDirection, Range, Damage, FireRate);
                     fireEffect.transform.position = shootingPosition.position;
@@ -277,6 +277,9 @@ namespace _Root.Scripts.Controllers
             var chance = Random.Range(0, 2);
             if(chance>0)
                 return;
+            FireRate = .05f;
+            Damage = 2;
+            Range = .2f;
             _xp = 0;
             _soldierLevel++;
             ChangeSoldier();
