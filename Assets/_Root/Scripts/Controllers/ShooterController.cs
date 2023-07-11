@@ -28,9 +28,10 @@ namespace _Root.Scripts.Controllers
         private int _xp;
         private float _shootTimer;
         private bool _isRunning;
-        private GangController _gangController;
+        private bool _isAiming;
         private Animator _animator;
         private DragNDropController _dragNDropController;
+        private Transform _crossHair;
         
         private static readonly int İsRunning = Animator.StringToHash("isRunning");
         private static readonly int İsShooting = Animator.StringToHash("isShooting");
@@ -38,8 +39,8 @@ namespace _Root.Scripts.Controllers
 
         private void Awake()
         {
-            _gangController = transform.root.GetComponent<GangController>();
             _dragNDropController = GetComponent<DragNDropController>();
+            _crossHair = GameObject.Find("CrossHair").transform;
         }
 
         private void OnEnable()
@@ -58,6 +59,8 @@ namespace _Root.Scripts.Controllers
             CoreGameSignals.Instance.OnLevelComplete -= OnGameEnd;
             LevelSignals.Instance.OnXpClaimed -= CollectXp;
             LevelSignals.Instance.OnStop -= OnGameEnd;
+            LevelSignals.Instance.OnFight -= Fight;
+            LevelSignals.Instance.OnFight -= RotationFix;
         }
 
         private void Subscribe()
@@ -66,6 +69,8 @@ namespace _Root.Scripts.Controllers
             CoreGameSignals.Instance.OnLevelComplete += OnGameEnd;
             LevelSignals.Instance.OnXpClaimed += CollectXp;
             LevelSignals.Instance.OnStop += OnGameEnd;
+            LevelSignals.Instance.OnFight += Fight;
+            LevelSignals.Instance.OnFight += RotationFix;
         }
 
         private void Start()
@@ -84,6 +89,7 @@ namespace _Root.Scripts.Controllers
             if(isCollectible)
                 return;
             BeginFire();
+            TakeAim();
         }
 
         private void OnGameStart()
@@ -159,14 +165,52 @@ namespace _Root.Scripts.Controllers
                 
                 if (bullet.gameObject.TryGetComponent(out Bullet firedBullet))
                 {
-                    firedBullet.Fire(7, Range, Damage, FireRate);
+                    var rawDirection = transform.forward * (0.03f);
+                    var fightingDirection = transform.forward * (0.05f);
+                    var desiredDirection = _isAiming ? fightingDirection : rawDirection;
+                    firedBullet.Fire(desiredDirection, Range, Damage, FireRate);
                 }
             }
         }
 
-        public int GetSoldierLevel()
+        private void TakeAim()
         {
-            return _soldierLevel;
+            if(!_isAiming)
+                return;
+            
+            transform.LookAt(_crossHair, Vector3.up);
+        }
+
+        private void RotationFix()
+        {
+            for (var i = 0; i < transform.childCount; i++)
+            {
+                switch (i)
+                {
+                  case 0:
+                      var fixedRot=Quaternion.Euler(0,20,0);
+                      transform.GetChild(i).localRotation = fixedRot;
+                      break;
+                      
+                  case 1:
+                      var fixedRot1=Quaternion.Euler(0,20,0);
+                      transform.GetChild(i).localRotation = fixedRot1;
+                      break;
+                  case 2:
+                      var fixedRot2=Quaternion.Euler(0,20,0);
+                      transform.GetChild(i).localRotation = fixedRot2;
+                      break;
+                  case 3:
+                      var fixedRot3=Quaternion.Euler(0,40,0);
+                      transform.GetChild(i).localRotation = fixedRot3;
+                      break;
+                  case 4:
+                      var fixedRot4=Quaternion.Euler(0,50,0);
+                      transform.GetChild(i).localRotation = fixedRot4;
+                      break;
+                }
+            }
+        
         }
         public void ChangeSoldierState(SoldierState state)
         {
@@ -229,6 +273,12 @@ namespace _Root.Scripts.Controllers
            // current.GetComponent<ShooterController>().Activate();
         }
 
+        private void Fight()
+        {
+            _isAiming = true;
+            _isRunning = true;
+            ChangeSoldierState(SoldierState.Shoot);
+        }
         public void Activate()
         {
             transform.tag = "Gang";

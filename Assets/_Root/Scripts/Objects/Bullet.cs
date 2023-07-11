@@ -11,16 +11,23 @@ namespace _Root.Scripts.Objects
         private Rigidbody _rb;
         private float _damage;
         private float _fireRate;
+        private Vector3 _speed;
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
         }
 
-        public void Fire(float speed,float range,float damage,float fireRate)
+        private void Update()
         {
+            transform.position += _speed;
+        }
+
+        public void Fire(Vector3 speed,float range,float damage,float fireRate)
+        {
+            _speed = speed;
             _damage = damage;
             _fireRate = fireRate;
-            _rb.velocity = Vector3.forward * speed;
+            //_rb.velocity = speed;
             StartCoroutine(KillTheBullet(range));
         }
 

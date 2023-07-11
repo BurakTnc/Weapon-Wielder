@@ -12,7 +12,8 @@ namespace _Root.Scripts.Controllers
     {
         [SerializeField] private Transform[] grids;
         [SerializeField] private Transform gridArea;
-       [SerializeField] private bool[] _occupiedGrids = new bool[9];
+        
+       private readonly bool[] _occupiedGrids = new bool[16];
 
 
         private void OnEnable()
@@ -30,6 +31,7 @@ namespace _Root.Scripts.Controllers
             LevelSignals.Instance.OnGrid += PlaceSoldiers;
             LevelSignals.Instance.OnNewGrid += SetOccupiedGrids;
             LevelSignals.Instance.OnGridLeave += EmptyAGrid;
+            LevelSignals.Instance.OnFight += Fight;
         }
 
         private void UnSubscribe()
@@ -37,6 +39,7 @@ namespace _Root.Scripts.Controllers
             LevelSignals.Instance.OnGrid -= PlaceSoldiers;
             LevelSignals.Instance.OnNewGrid -= SetOccupiedGrids;
             LevelSignals.Instance.OnGridLeave -= EmptyAGrid;
+            LevelSignals.Instance.OnFight -= Fight;
         }
 
         private void PlaceSoldiers(List<GameObject> soldiers)
@@ -68,6 +71,10 @@ namespace _Root.Scripts.Controllers
             SetGridColliders();
         }
 
+        private void Fight()
+        {
+            CameraSignals.Instance.OnFightLook?.Invoke(GetFightPosition());
+        }
         private void EmptyAGrid(int index)
         {
             _occupiedGrids[index] = false;
@@ -91,7 +98,13 @@ namespace _Root.Scripts.Controllers
 
         public Vector3 GetMergePosition()
         {
-            var offset = new Vector3(0, 8, -3); //offset for camera merge position
+            var offset = new Vector3(0, 10, -28); //offset for camera merge position
+            return gridArea.position + offset;
+        }
+
+        public Vector3 GetFightPosition()
+        {
+            var offset = new Vector3(0, 7, -33);
             return gridArea.position + offset;
         }
     }

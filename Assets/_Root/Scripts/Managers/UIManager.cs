@@ -37,17 +37,24 @@ namespace _Root.Scripts.Managers
         private void UnSubscribe()
         {
             //CoreGameSignals.Instance.OnLevelComplete -= Completed;
+            LevelSignals.Instance.OnStop -= Merge;
         }
 
         private void Subscribe()
         {
            // CoreGameSignals.Instance.OnLevelComplete += Completed;
+           LevelSignals.Instance.OnStop += Merge;
         }
 
         private void Completed()
         {
             gamePanel.SetActive(false);
             winPanel.SetActive(true);
+        }
+
+        private void Merge()
+        {
+            mergePanel.SetActive(true);
         }
         public void UpdateXp(int xp)
         {
@@ -68,6 +75,7 @@ namespace _Root.Scripts.Managers
 
         public void FightButton()
         {
+            mergePanel.SetActive(false);
             LevelSignals.Instance.OnFight?.Invoke();
         }
     }

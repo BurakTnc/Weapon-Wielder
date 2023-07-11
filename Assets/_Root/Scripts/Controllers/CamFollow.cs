@@ -62,8 +62,9 @@ namespace _Root.Scripts.Controllers
        private void GoToFightPosition(Vector3 desiredPosition)
        {
            _isNeutral = true;
-           transform.DOMove(desiredPosition, 2).SetEase(Ease.InSine);
-           transform.DORotate(onFightRotation, 2).SetEase(Ease.InSine);
+           desiredPosition.x = 0;
+           transform.DOMove(desiredPosition, 1).SetEase(Ease.InSine);
+           transform.DORotate(onFightRotation, 1).SetEase(Ease.InSine);
        }
     }
 }
