@@ -13,6 +13,9 @@ namespace _Root.Scripts.Signals
         public UnityAction<Transform> OnNewGangMember = delegate { };
         public UnityAction<List<GameObject>> OnGrid = delegate { };
         public UnityAction OnStop = delegate { };
+        public UnityAction<int, int> OnNewGrid = delegate { };
+        public UnityAction<int> OnGridLeave = delegate { };
+        public UnityAction OnFight = delegate { };
 
         private void Awake()
         {

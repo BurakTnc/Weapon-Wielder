@@ -236,6 +236,32 @@ namespace _Root.Scripts.Controllers
             OnGameStart();
         }
 
+        private void CheckMergeConditions(int takenLevel,GameObject takenSoldier)
+        {
+            if(takenLevel>=4)
+                return;
+            
+            if (takenLevel == _soldierLevel)
+            {
+                Merge(takenSoldier);
+            }
+        }
+
+        private void Merge(GameObject takenSoldier)
+        {
+            var dragController = takenSoldier.GetComponent<DragNDropController>();
+            
+            dragController.LeaveGridByMerge();
+            MergeLevelUp();
+            Destroy(takenSoldier);
+        }
+
+        private void MergeLevelUp()
+        {
+            _soldierLevel++;
+            ChangeSoldier();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.TryGetComponent(out GateController gate))
@@ -245,7 +271,7 @@ namespace _Root.Scripts.Controllers
 
             if (other.gameObject.CompareTag("Soldier"))
             {
-                LevelSignals.Instance.OnNewGangMember?.Invoke(other.transform.root);
+                LevelSignals.Instance.OnNewGangMember?.Invoke(other.transform);
             }
         }
 
@@ -255,8 +281,15 @@ namespace _Root.Scripts.Controllers
             {
                 if(!canMerge)
                     return;
-                _dragNDropController.PlaceSoldier(other.transform.position);
+                _dragNDropController.PlaceSoldier(other.transform.position,other.transform);
+            }
+            if (other.gameObject.CompareTag("Gang"))
+            {
+                if(!canMerge)
+                    return;
+                other.GetComponent<ShooterController>().CheckMergeConditions(_soldierLevel, transform.gameObject);
             }
         }
+        
     }
 }

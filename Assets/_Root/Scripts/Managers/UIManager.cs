@@ -9,8 +9,8 @@ namespace _Root.Scripts.Managers
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance;
-        
-        [SerializeField] private GameObject gamePanel, startPanel, winPanel;
+
+        [SerializeField] private GameObject gamePanel, startPanel, winPanel, mergePanel, fightPanel;
         [SerializeField] private Image xpBar;
 
         private void Awake()
@@ -64,6 +64,11 @@ namespace _Root.Scripts.Managers
         public void NextLevelButton()
         {
             CoreGameSignals.Instance.OnLevelLoad?.Invoke();
+        }
+
+        public void FightButton()
+        {
+            LevelSignals.Instance.OnFight?.Invoke();
         }
     }
 }

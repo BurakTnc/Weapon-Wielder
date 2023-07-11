@@ -12,7 +12,7 @@ namespace _Root.Scripts.Controllers
     {
         [SerializeField] private Transform[] grids;
         [SerializeField] private Transform gridArea;
-        private readonly bool[] _occupiedGrids = new bool[9];
+       [SerializeField] private bool[] _occupiedGrids = new bool[9];
 
 
         private void OnEnable()
@@ -28,11 +28,15 @@ namespace _Root.Scripts.Controllers
         private void Subscribe()
         {
             LevelSignals.Instance.OnGrid += PlaceSoldiers;
+            LevelSignals.Instance.OnNewGrid += SetOccupiedGrids;
+            LevelSignals.Instance.OnGridLeave += EmptyAGrid;
         }
 
         private void UnSubscribe()
         {
             LevelSignals.Instance.OnGrid -= PlaceSoldiers;
+            LevelSignals.Instance.OnNewGrid -= SetOccupiedGrids;
+            LevelSignals.Instance.OnGridLeave -= EmptyAGrid;
         }
 
         private void PlaceSoldiers(List<GameObject> soldiers)
@@ -43,13 +47,16 @@ namespace _Root.Scripts.Controllers
                 var takenSoldier = soldiers[i];
                 var desiredPosition = new Vector3(grids[i].position.x, takenSoldier.transform.position.y,
                     grids[i].position.z);
-
-                _occupiedGrids[i] = true;
-                //takenSoldier.transform.DOJump(desiredPosition,1, 1, 1f).SetDelay(delay);
+                
                 var shooterComponent = takenSoldier.GetComponent<ShooterController>();
-                //shooterComponent.ChangeSoldierState(SoldierState.RunToGrid);
-                takenSoldier.transform.DOMove(desiredPosition, 1f).SetEase(Ease.OutBack).SetDelay(delay)
+                var dragNDropComponent = takenSoldier.GetComponent<DragNDropController>();
+                var rb = takenSoldier.AddComponent<Rigidbody>();
+
+                rb.isKinematic = true;
+                _occupiedGrids[i] = true;
+                takenSoldier.transform.DOMove(desiredPosition, 1f).SetEase(Ease.OutSine).SetDelay(delay)
                     .OnComplete(() => SetSoldierState(shooterComponent));
+                dragNDropComponent.InitFirstGrid(i);
                 delay += .1f;
 
                 void SetSoldierState(ShooterController shooter)
@@ -57,6 +64,28 @@ namespace _Root.Scripts.Controllers
                     shooter.ChangeSoldierState(SoldierState.Idle);
                     takenSoldier.transform.SetParent(null);
                 }
+            }
+            SetGridColliders();
+        }
+
+        private void EmptyAGrid(int index)
+        {
+            _occupiedGrids[index] = false;
+            SetGridColliders();
+        }
+        private void SetOccupiedGrids(int oldIndex,int newIndex)
+        {
+            _occupiedGrids[oldIndex] = false;
+            _occupiedGrids[newIndex] = true;
+            SetGridColliders();
+        }
+
+        private void SetGridColliders()
+        {
+            for (var i = 0; i < grids.Length; i++)
+            {
+                var coll = grids[i].GetComponent<BoxCollider>();
+                coll.enabled = !_occupiedGrids[i];
             }
         }
 
