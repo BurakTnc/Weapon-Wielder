@@ -2,8 +2,13 @@ namespace _Root.Scripts.Enums
 {
     public enum PooledObjectType
     { 
-        Bullet,
-        HitParticle,
-        Explosion
+        Bullet1,
+        Bullet2,
+        Bullet3,
+        Bullet4,
+        Bullet5,
+        Explosion,
+        HitParticle
+        
     }
 }

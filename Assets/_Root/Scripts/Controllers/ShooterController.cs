@@ -20,7 +20,9 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private SoldierData[] soldierData;
         [SerializeField] private Transform shootingPosition;
         [SerializeField] private bool isCollectible;
-
+        [SerializeField] private Material level1Mat;
+        [SerializeField] private SkinnedMeshRenderer renderer;
+        
         private float _fireRate;
         private float _range;
         private float _damage;
@@ -32,7 +34,7 @@ namespace _Root.Scripts.Controllers
         private Animator _animator;
         private DragNDropController _dragNDropController;
         private Transform _crossHair;
-        
+
         private static readonly int İsRunning = Animator.StringToHash("isRunning");
         private static readonly int İsShooting = Animator.StringToHash("isShooting");
         private static readonly int RunToGrid = Animator.StringToHash("RunToGrid");
@@ -159,8 +161,28 @@ namespace _Root.Scripts.Controllers
         {
             for (var i = 0; i < _soldierLevel+1; i++)
             {
-                var bullet = PoolManager.Instance.GetPooledObject(PooledObjectType.Bullet);
+                var bulletType = PooledObjectType.Bullet1;
 
+                switch (_soldierLevel)
+                {
+                    case 1:
+                        bulletType = PooledObjectType.Bullet2;
+                        break;
+                    case 2:
+                        bulletType = PooledObjectType.Bullet3;
+                        break;
+                    case 3:
+                        bulletType = PooledObjectType.Bullet4;
+                        break;
+                    case 4:
+                        bulletType = PooledObjectType.Bullet5;
+                        break;
+                    default:
+                        break;
+                }
+                
+                var bullet = PoolManager.Instance.GetPooledObject(bulletType);
+                var fireEffect = PoolManager.Instance.GetPooledObject(PooledObjectType.Explosion);
                 bullet.transform.position = shootingPosition.position;
                 
                 if (bullet.gameObject.TryGetComponent(out Bullet firedBullet))
@@ -169,6 +191,7 @@ namespace _Root.Scripts.Controllers
                     var fightingDirection = transform.forward * (0.05f);
                     var desiredDirection = _isAiming ? fightingDirection : rawDirection;
                     firedBullet.Fire(desiredDirection, Range, Damage, FireRate);
+                    fireEffect.transform.position = shootingPosition.position;
                 }
             }
         }
@@ -212,7 +235,8 @@ namespace _Root.Scripts.Controllers
             }
         
         }
-        public void ChangeSoldierState(SoldierState state)
+
+        public void ChangeSoldierState(SoldierState state, bool isJoined = false)
         {
             var animator = GetCurrentAnimator();
             switch (state)
@@ -232,6 +256,9 @@ namespace _Root.Scripts.Controllers
                 default:
                     break;
             }
+            if(!isJoined)
+                return;
+            renderer.material.DOColor(level1Mat.color, 1).SetEase(Ease.InSine);
         }
 
         private Animator GetCurrentAnimator()

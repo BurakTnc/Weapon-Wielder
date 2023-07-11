@@ -13018,7 +13018,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pool:
   - pooledObject: {fileID: 8802500611210792226, guid: 84b17248c3fab459cad268995277d050, type: 3}
+    poolSize: 500
+  - pooledObject: {fileID: 8802500611210792226, guid: 8fa1d52328bc844309b9fe18e7ebe23e, type: 3}
+    poolSize: 500
+  - pooledObject: {fileID: 8802500611210792226, guid: f33f3edbf0fa1483598e161a0d11a6ff, type: 3}
+    poolSize: 500
+  - pooledObject: {fileID: 8802500611210792226, guid: d0130019410d3439a85604bd9112631a, type: 3}
+    poolSize: 300
+  - pooledObject: {fileID: 8802500611210792226, guid: b2a9c801608ca45879a8cfd19afafa81, type: 3}
     poolSize: 100
+  - pooledObject: {fileID: 152484, guid: 23fc589b73077394db72d954703e8d1c, type: 3}
+    poolSize: 1000
 --- !u!1 &445307535
 GameObject:
   m_ObjectHideFlags: 0
@@ -27129,6 +27139,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1923111355}
     m_Modifications:
+    - target: {fileID: 410663265153367122, guid: 8be4c332b369244f4a83a0c8a4633ffd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3c047c3ab762e21429ad5b44e830a18c, type: 2}
     - target: {fileID: 3434582811217249211, guid: 8be4c332b369244f4a83a0c8a4633ffd, type: 3}
       propertyPath: m_RootOrder
       value: 0

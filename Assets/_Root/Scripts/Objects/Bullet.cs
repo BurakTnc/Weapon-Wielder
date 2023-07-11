@@ -27,7 +27,7 @@ namespace _Root.Scripts.Objects
             _speed = speed;
             _damage = damage;
             _fireRate = fireRate;
-            //_rb.velocity = speed;
+            Debug.Log("FR: " + _fireRate + "DMG: " + _damage + "RNF: " + range);
             StartCoroutine(KillTheBullet(range));
         }
 
