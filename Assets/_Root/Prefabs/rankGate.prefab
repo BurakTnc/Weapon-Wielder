@@ -632,6 +632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: XPBottle
       objectReference: {fileID: 0}
+    - target: {fileID: 7261775283724194358, guid: 45254669845a04db384d499235d29b39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8038030925023922316, guid: 45254669845a04db384d499235d29b39, type: 3}
       propertyPath: m_RootOrder
       value: 4
