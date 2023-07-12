@@ -7,7 +7,9 @@ namespace _Root.Scripts.Enums
         Bullet3,
         Bullet4,
         Bullet5,
+        EnemyBullet,
         Explosion,
+        Enemy,
         HitParticle
         
     }

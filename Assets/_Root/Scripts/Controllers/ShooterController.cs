@@ -7,6 +7,7 @@ using _Root.Scripts.ScriptableObjects;
 using _Root.Scripts.Signals;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 
@@ -21,7 +22,7 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private Transform shootingPosition;
         [SerializeField] private bool isCollectible;
         [SerializeField] private Material level1Mat;
-        [SerializeField] private SkinnedMeshRenderer renderer;
+        [SerializeField] private SkinnedMeshRenderer meshRenderer;
         
         private float _fireRate;
         private float _range;
@@ -34,6 +35,7 @@ namespace _Root.Scripts.Controllers
         private Animator _animator;
         private DragNDropController _dragNDropController;
         private Transform _crossHair;
+        private ShooterHealthController _healthController;
 
         private static readonly int İsRunning = Animator.StringToHash("isRunning");
         private static readonly int İsShooting = Animator.StringToHash("isShooting");
@@ -43,6 +45,7 @@ namespace _Root.Scripts.Controllers
         {
             _dragNDropController = GetComponent<DragNDropController>();
             _crossHair = GameObject.Find("CrossHair").transform;
+            _healthController = GetComponent<ShooterHealthController>();
         }
 
         private void OnEnable()
@@ -113,7 +116,7 @@ namespace _Root.Scripts.Controllers
             set
             {
                 _fireRate -= value;
-                _fireRate = Mathf.Clamp(_fireRate, 0.03f, 2);
+                _fireRate = Mathf.Clamp(_fireRate, 0.1f, 2);
             } 
         }
         public float Range
@@ -188,7 +191,7 @@ namespace _Root.Scripts.Controllers
                 if (bullet.gameObject.TryGetComponent(out Bullet firedBullet))
                 {
                     var rawDirection = transform.forward * (0.04f);
-                    var fightingDirection = transform.forward * (0.07f);
+                    var fightingDirection = transform.forward * (0.5f);
                     var desiredDirection = _isAiming ? fightingDirection : rawDirection;
                     firedBullet.Fire(desiredDirection, Range, Damage, FireRate);
                     fireEffect.transform.position = shootingPosition.position;
@@ -258,7 +261,7 @@ namespace _Root.Scripts.Controllers
             }
             if(!isJoined)
                 return;
-            renderer.material.DOColor(level1Mat.color, 1).SetEase(Ease.InSine);
+            meshRenderer.material.DOColor(level1Mat.color, 1).SetEase(Ease.InSine);
         }
 
         private Animator GetCurrentAnimator()
@@ -277,6 +280,7 @@ namespace _Root.Scripts.Controllers
             var chance = Random.Range(0, 2);
             if(chance>0)
                 return;
+            _healthController.IncreaseHealth();
             FireRate = .05f;
             Damage = 2;
             Range = .2f;
@@ -370,6 +374,12 @@ namespace _Root.Scripts.Controllers
                 other.GetComponent<ShooterController>().CheckMergeConditions(_soldierLevel, transform.gameObject);
             }
         }
-        
+
+        public int GetSoldierLevel() => _soldierLevel;
+        public void Die()
+        {
+            _isRunning = false;
+            _isAiming = false;
+        }
     }
 }

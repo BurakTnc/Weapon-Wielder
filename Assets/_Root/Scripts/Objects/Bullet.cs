@@ -8,14 +8,11 @@ namespace _Root.Scripts.Objects
 {
     public class Bullet : MonoBehaviour
     {
-        private Rigidbody _rb;
+        [SerializeField] private bool isEnemy;
+        
         private float _damage;
         private float _fireRate;
         private Vector3 _speed;
-        private void Awake()
-        {
-            _rb = GetComponent<Rigidbody>();
-        }
 
         private void Update()
         {
@@ -27,7 +24,7 @@ namespace _Root.Scripts.Objects
             _speed = speed;
             _damage = damage;
             _fireRate = fireRate;
-            Debug.Log("FR: " + _fireRate + "DMG: " + _damage + "RNF: " + range);
+            //Debug.Log("FR: " + _fireRate + " DMG: " + _damage + " RNF: " + range);
             StartCoroutine(KillTheBullet(range));
         }
 
@@ -53,6 +50,22 @@ namespace _Root.Scripts.Objects
             if (other.gameObject.TryGetComponent(out BonusDummyController bonusDummy))
             {
                 bonusDummy.GetHit(_damage,transform.position,_fireRate);
+                gameObject.SetActive(false);
+            }
+
+            if (other.gameObject.TryGetComponent(out EnemyHealthController enemy))
+            {
+                if(isEnemy)
+                    return;
+                enemy.GetHit(_damage,transform.position);
+                gameObject.SetActive(false);
+            }
+            if (other.gameObject.TryGetComponent(out ShooterHealthController shooter))
+            {
+                if(!isEnemy)
+                    return;
+                
+                shooter.GetHit(_damage,transform.position);
                 gameObject.SetActive(false);
             }
         }

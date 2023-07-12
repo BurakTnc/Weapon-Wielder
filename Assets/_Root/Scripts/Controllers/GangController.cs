@@ -9,10 +9,24 @@ namespace _Root.Scripts.Controllers
 {
     public class GangController : MonoBehaviour
     {
+        public static GangController Instance;
+        
         [SerializeField] private List<Transform> soldierPositions = new List<Transform>();
         [SerializeField] private List<GameObject> soldiers = new List<GameObject>();
 
         private int _gangSize;
+
+
+        private void Awake()
+        {
+            if (Instance != this && Instance != null) 
+            {
+                Destroy(this);
+                return;
+            }
+
+            Instance = this;
+        }
 
         private void OnEnable()
         {

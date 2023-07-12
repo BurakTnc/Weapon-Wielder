@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Root.Scripts.Controllers;
 using _Root.Scripts.Enums;
 using UnityEngine;
 
@@ -61,6 +62,10 @@ namespace _Root.Scripts.Managers
 
             obj.SetActive(true);
             _pool[(int)objectType].ObjectPool.Enqueue(obj);
+            if (objectType == PooledObjectType.Enemy)
+            {
+                obj.GetComponent<EnemyHealthController>().ResetSoldier();
+            }
 
             return obj;
         }

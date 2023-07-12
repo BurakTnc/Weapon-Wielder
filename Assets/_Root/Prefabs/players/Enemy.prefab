@@ -6769,11 +6769,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3434582811217249211}
   - component: {fileID: 6101466048603874671}
-  - component: {fileID: 8448423772856307565}
-  - component: {fileID: 1490997628}
-  - component: {fileID: 5124364295012853130}
+  - component: {fileID: 4545678173353120905}
+  - component: {fileID: 5606183316233212867}
+  - component: {fileID: 1283106304091755347}
   m_Layer: 0
-  m_Name: Soldier
+  m_Name: Enemy
   m_TagString: Gang
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6786,9 +6786,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6267075250488170873}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7773463210541063297}
@@ -6798,7 +6798,7 @@ Transform:
   - {fileID: 4159659193766272703}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!136 &6101466048603874671
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6810,10 +6810,10 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.45
-  m_Height: 1.87
+  m_Height: 1.27
   m_Direction: 1
-  m_Center: {x: -0.00038646898, y: 0.92, z: 0.029046185}
---- !u!114 &8448423772856307565
+  m_Center: {x: -0.00038646898, y: 0.61224455, z: 0.029046185}
+--- !u!114 &4545678173353120905
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6822,27 +6822,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6267075250488170873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6983d991a54b4006925b97931cca9220, type: 3}
+  m_Script: {fileID: 11500000, guid: 33ad314d83cd4244ace9f4f3d7e97d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMerge: 0
-  soldiers:
-  - {fileID: 6965717556223952443}
-  - {fileID: 4936584518899656964}
-  - {fileID: 4308881591713456052}
-  - {fileID: 5006235180180289588}
-  - {fileID: 3670929936519005189}
-  soldierData:
-  - {fileID: 11400000, guid: 2a554c81b80a743bab1ced82a4e9be28, type: 2}
-  - {fileID: 11400000, guid: 385eb5318a37a4c6e9ad53fbb38ecf9f, type: 2}
-  - {fileID: 11400000, guid: 2877036d475bd4098897db1d546f1d23, type: 2}
-  - {fileID: 11400000, guid: 7e7011aefae764709a3b68e44bda6c1f, type: 2}
-  - {fileID: 11400000, guid: 7e7ad147108ee4cc7ad73dc0aeff3ee0, type: 2}
-  shootingPosition: {fileID: 5761391388914334723}
-  isCollectible: 0
-  level1Mat: {fileID: 2100000, guid: 3c047c3ab762e21429ad5b44e830a18c, type: 2}
-  meshRenderer: {fileID: 410663265153367122}
---- !u!114 &1490997628
+  damage: 5
+  range: 0.7
+  fireRate: 0.4
+  shootingPos: {fileID: 5761391388914334723}
+--- !u!114 &5606183316233212867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6851,10 +6838,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6267075250488170873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7349d165f19849338c42a2d00c388c7e, type: 3}
+  m_Script: {fileID: 11500000, guid: eded5153c8534a3eada300384136d9bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5124364295012853130
+  runSpeed: 5
+--- !u!114 &1283106304091755347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6863,12 +6851,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6267075250488170873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdc1a4ddadab4c8fb892744556aec4ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d126f2cfd8b4555ab08108a2029995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
   deathMaterial: {fileID: 2100000, guid: 6359f7cbdbf887c4ab0070471222e2b7, type: 2}
-  renderer: {fileID: 0}
+  renderer: {fileID: 410663265153367122}
 --- !u!1 &6273209653417356768
 GameObject:
   m_ObjectHideFlags: 0
@@ -7776,7 +7764,7 @@ Animator:
   m_GameObject: {fileID: 6965717556223952443}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ae48f10f8deadbc468feedd7784d0574, type: 3}
-  m_Controller: {fileID: 9100000, guid: fa76c0936ab1749f3aedd844d9b2a9a0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0eed07c97a7fe4591827e255a7925135, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -10131,7 +10119,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a59e7ff554c8c847a437b6f30ca70de, type: 2}
+  - {fileID: 2100000, guid: 0f6151e50997b45bd8b62016c389f255, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

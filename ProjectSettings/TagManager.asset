@@ -8,6 +8,7 @@ TagManager:
   - Soldier
   - Grid
   - Gang
+  - StopPoint
   layers:
   - Default
   - TransparentFX
