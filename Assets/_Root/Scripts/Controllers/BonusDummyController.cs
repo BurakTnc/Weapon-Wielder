@@ -9,6 +9,7 @@ namespace _Root.Scripts.Controllers
     {
         [SerializeField] private int hitCount;
         [SerializeField] private GameObject hitParticle;
+        [SerializeField] private Transform soldier;
         
         private bool _hasExploded;
         private readonly List<GameObject> _throwedPieces = new List<GameObject>();
@@ -33,6 +34,7 @@ namespace _Root.Scripts.Controllers
             if(_hasExploded)
                 return;
 
+            soldier.tag = "Soldier";
             _hasExploded = true;
             var partsCount = transform.childCount;
             

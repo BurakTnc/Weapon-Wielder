@@ -36,6 +36,7 @@ namespace _Root.Scripts.Controllers
         { 
             if(_isDead)
                 return;
+            GangController.Instance.EliminateSoldier();
             _animator=transform.GetChild(_shooterController.GetSoldierLevel()).GetComponent<Animator>();
             renderer = transform.GetChild(_shooterController.GetSoldierLevel()).GetChild(1)
                 .GetComponent<SkinnedMeshRenderer>();

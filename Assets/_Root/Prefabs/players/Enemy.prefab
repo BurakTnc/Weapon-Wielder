@@ -6826,7 +6826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  range: 0.7
+  range: 1.2
   fireRate: 0.4
   shootingPos: {fileID: 5761391388914334723}
 --- !u!114 &5606183316233212867

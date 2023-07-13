@@ -14,7 +14,7 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private List<Transform> soldierPositions = new List<Transform>();
         [SerializeField] private List<GameObject> soldiers = new List<GameObject>();
 
-        public int _gangSize;
+        private int _gangSize;
 
 
         private void Awake()
@@ -72,6 +72,14 @@ namespace _Root.Scripts.Controllers
             shooter.Activate();
         }
 
+        public void EliminateSoldier()
+        {
+            _gangSize--;
+            if (_gangSize <= -1) 
+            {
+                CoreGameSignals.Instance.OnLevelComplete?.Invoke();
+            }
+        }
         public List<GameObject> GetGangList()
         {
             return soldiers;
