@@ -78,5 +78,10 @@ namespace _Root.Scripts.Managers
             mergePanel.SetActive(false);
             LevelSignals.Instance.OnFight?.Invoke();
         }
+
+        public void BuySoldierButton()
+        {
+            LevelSignals.Instance.OnBuySoldier?.Invoke();
+        }
     }
 }

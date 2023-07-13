@@ -52,7 +52,7 @@ namespace _Root.Scripts.Controllers
 
         private IEnumerator DeathDelay()
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(5);
             gameObject.SetActive(false);
         }
 

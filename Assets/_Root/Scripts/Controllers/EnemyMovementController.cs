@@ -24,11 +24,11 @@ namespace _Root.Scripts.Controllers
 
         private void Init()
         {
-            var gangList = GangController.Instance.GetGangList();
-            var aimedSoldier = Random.Range(0, gangList.Count);
-
-            _targetedSoldier = gangList[aimedSoldier].transform;
-            //transform.LookAt(_targetedSoldier, Vector3.up);
+            // var gangList = GangController.Instance.GetGangList();
+            // var aimedSoldier = Random.Range(0, gangList.Count);
+            //
+            // _targetedSoldier = gangList[aimedSoldier].transform;
+            // //transform.LookAt(_targetedSoldier, Vector3.up);
         }
 
         private void Run()

@@ -14,7 +14,7 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private List<Transform> soldierPositions = new List<Transform>();
         [SerializeField] private List<GameObject> soldiers = new List<GameObject>();
 
-        private int _gangSize;
+        public int _gangSize;
 
 
         private void Awake()
@@ -41,17 +41,23 @@ namespace _Root.Scripts.Controllers
         private void Subscribe()
         {
             LevelSignals.Instance.OnNewGangMember += AddNewSoldier;
+            LevelSignals.Instance.OnBuySoldier += BuyNewSoldier;
         }
 
         private void UnSubscribe()
         {
             LevelSignals.Instance.OnNewGangMember -= AddNewSoldier;
+            LevelSignals.Instance.OnBuySoldier -= BuyNewSoldier;
         }
 
+        private void BuyNewSoldier()
+        {
+            _gangSize++;
+        }
         private void AddNewSoldier(Transform newSoldier)
         {
             var shooterComp = newSoldier.GetComponent<ShooterController>();
-            
+            newSoldier.transform.tag = "Gang";
             newSoldier.SetParent(transform);
             soldiers.Add(newSoldier.gameObject);
             shooterComp.ChangeSoldierState(SoldierState.Run,true);
