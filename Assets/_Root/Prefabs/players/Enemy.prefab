@@ -6826,7 +6826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  range: 1.2
+  range: 0.7
   fireRate: 0.4
   shootingPos: {fileID: 5761391388914334723}
 --- !u!114 &5606183316233212867
@@ -6854,7 +6854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d126f2cfd8b4555ab08108a2029995f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 15
   deathMaterial: {fileID: 2100000, guid: 6359f7cbdbf887c4ab0070471222e2b7, type: 2}
   renderer: {fileID: 410663265153367122}
 --- !u!1 &6273209653417356768

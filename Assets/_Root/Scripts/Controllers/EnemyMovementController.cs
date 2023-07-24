@@ -1,4 +1,5 @@
 using System;
+using _Root.Scripts.Signals;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,7 +15,17 @@ namespace _Root.Scripts.Controllers
 
         private void OnEnable()
         {
-            //Init();
+            CoreGameSignals.Instance.OnLevelComplete += Stop;
+        }
+
+        private void OnDisable()
+        {
+            CoreGameSignals.Instance.OnLevelComplete -= Stop;
+        }
+
+        private void Stop()
+        {
+            _isStopped = true;
         }
 
         private void Update()
@@ -61,6 +72,7 @@ namespace _Root.Scripts.Controllers
             if (other.CompareTag("StopPoint"))
             {
                 _isStopped = true;
+                LevelSignals.Instance.OnEnemyKilled?.Invoke();
             }
         }
     }

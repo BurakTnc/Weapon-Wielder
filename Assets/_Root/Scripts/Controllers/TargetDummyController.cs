@@ -36,10 +36,25 @@ namespace _Root.Scripts.Controllers
             if (partsCount <= 0 || !canWreck)
                 return;
 
-            var part = Random.Range(0, partsCount);
+            var part = Random.Range(0, partsCount-2);
             var selectedPart = transform.GetChild(part);
                 
             selectedPart.SetParent(null);
+            if (part <= 2 && part != 0) 
+            {
+                for (var i = 0; i < part; i++)
+                {
+                    var prevPiece = transform.GetChild(0);
+                    prevPiece.SetParent(null);
+
+                    if (!prevPiece.TryGetComponent(out Rigidbody prevRb))
+                        continue;
+                    prevRb.constraints = RigidbodyConstraints.None;
+                    prevRb.isKinematic = false;
+                    //prevRb.AddExplosionForce(5, transform.position, 30, 0f,ForceMode.VelocityChange);
+                }
+                
+            }
             if (selectedPart.TryGetComponent(out Rigidbody rb))
             {
                 rb.constraints = RigidbodyConstraints.None;

@@ -12,7 +12,10 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private float spawnCoolDown;
         [SerializeField] private float xSpawnClamp;
         [SerializeField] private float zSpawnPos;
+        [SerializeField] private int enemyCount;
 
+        private int _killedEnemy;
+        private int _spawnCount;
         private bool _isSpawning;
         private float _timer;
 
@@ -29,11 +32,13 @@ namespace _Root.Scripts.Controllers
         private void Subscribe()
         {
             LevelSignals.Instance.OnFight += Fight;
+            LevelSignals.Instance.OnEnemyKilled += OnEnemyKilled;
         }
 
         private void UnSubscribe()
         {
             LevelSignals.Instance.OnFight -= Fight;
+            LevelSignals.Instance.OnEnemyKilled -= OnEnemyKilled;
         }
 
         private void Update()
@@ -44,6 +49,15 @@ namespace _Root.Scripts.Controllers
         private void Fight()
         {
             _isSpawning = true;
+        }
+
+        private void OnEnemyKilled()
+        {
+            _killedEnemy++;
+            if (_killedEnemy >= enemyCount) 
+            {
+                CoreGameSignals.Instance.OnLevelComplete?.Invoke();
+            }
         }
         private void BeginSpawn()
         {
@@ -63,10 +77,14 @@ namespace _Root.Scripts.Controllers
 
         private void Spawn()
         {
+            if(_spawnCount >=enemyCount)
+                return;
+            
             var soldier = PoolManager.Instance.GetPooledObject(PooledObjectType.Enemy);
             var chosenXPos = Random.Range(-xSpawnClamp, xSpawnClamp + .1f);
             var desiredPos = new Vector3(chosenXPos, -.5f, zSpawnPos);
 
+            _spawnCount++;
             soldier.transform.position = desiredPos;
 
         }

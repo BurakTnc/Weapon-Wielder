@@ -17,6 +17,7 @@ namespace _Root.Scripts.Signals
         public UnityAction<int> OnGridLeave = delegate { };
         public UnityAction OnFight = delegate { };
         public UnityAction OnBuySoldier = delegate { };
+        public UnityAction OnEnemyKilled = delegate { };
 
         private void Awake()
         {

@@ -2,6 +2,7 @@ using System;
 using _Root.Scripts.Enums;
 using _Root.Scripts.Managers;
 using _Root.Scripts.Objects;
+using _Root.Scripts.Signals;
 using UnityEngine;
 
 namespace _Root.Scripts.Controllers
@@ -16,6 +17,16 @@ namespace _Root.Scripts.Controllers
         private bool _isDead;
         private float _timer;
 
+
+        private void OnEnable()
+        {
+            CoreGameSignals.Instance.OnLevelComplete += Stop;
+        }
+
+        private void OnDisable()
+        {
+            CoreGameSignals.Instance.OnLevelComplete -= Stop;
+        }
 
         private void Update()
         {
@@ -50,6 +61,11 @@ namespace _Root.Scripts.Controllers
                 firedBullet.Fire(fightingDirection, range, damage, fireRate);
                 fireEffect.transform.position = shootingPos.position;
             }
+        }
+
+        private void Stop()
+        {
+            _isDead = true;
         }
 
         public void Die()

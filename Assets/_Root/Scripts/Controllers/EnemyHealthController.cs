@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using _Root.Scripts.Enums;
 using _Root.Scripts.Managers;
+using _Root.Scripts.Signals;
 using DG.Tweening;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ namespace _Root.Scripts.Controllers
         { 
             if(_isDead)
                 return;
-            
+            LevelSignals.Instance.OnEnemyKilled?.Invoke();
             _animator.SetTrigger("isDied");
             _isDead = true;
             _collider.isTrigger = false;
