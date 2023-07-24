@@ -84,7 +84,7 @@ namespace _Root.Scripts.Controllers
                     break;
             }
 
-            transform.DOMoveY(-5, goDownDuration).SetEase(Ease.InBack).SetDelay(1);
+            transform.DOMoveY(-5, goDownDuration).SetEase(Ease.InBack).SetDelay(0.5f);
 
 
         }
