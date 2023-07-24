@@ -78,14 +78,15 @@ namespace _Root.Scripts.Controllers
                 case GateMode.LevelUp:
                     LevelSignals.Instance.OnXpClaimed?.Invoke(_xp);
                     _boxCollider.enabled = false;
-                    transform.DOMoveY(-5, goDownDuration).SetEase(Ease.InBack);
+                    //transform.DOMoveY(-5, goDownDuration).SetEase(Ease.InBack);
                     break;
                 default:
                     break;
             }
 
-           // _boxCollider.enabled = false;
-           
+            transform.DOMoveY(-5, goDownDuration).SetEase(Ease.InBack).SetDelay(1);
+
+
         }
 
         public void CollectPotion()
