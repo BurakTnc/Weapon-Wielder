@@ -10,7 +10,7 @@ namespace _Root.Scripts.Enums
         EnemyBullet,
         Explosion,
         Enemy,
-        HitParticle
+        MoneyParticle
         
     }
 }

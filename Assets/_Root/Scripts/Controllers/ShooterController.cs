@@ -278,7 +278,7 @@ namespace _Root.Scripts.Controllers
         private void LevelUp()
         {
             var chance = Random.Range(0, 2);
-            if(chance>0)
+            if(chance>0 || isCollectible)
                 return;
             _healthController.IncreaseHealth();
             FireRate = .05f;

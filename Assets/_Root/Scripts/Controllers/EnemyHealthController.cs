@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using _Root.Scripts.Enums;
+using _Root.Scripts.Managers;
 using DG.Tweening;
 using UnityEngine;
 
@@ -52,7 +54,8 @@ namespace _Root.Scripts.Controllers
             renderer.material.DOColor(deathMaterial.color, 1);
             _enemyMovement.Die();
             _enemyShooter.Die();
-            
+            var particle = PoolManager.Instance.GetPooledObject(PooledObjectType.MoneyParticle);
+            particle.transform.position = transform.position;
             _rb = gameObject.AddComponent<Rigidbody>();
             _rb.AddExplosionForce(takenDamage, impactPosition, 5, .1f, ForceMode.VelocityChange);
             StartCoroutine(DeathDelay());

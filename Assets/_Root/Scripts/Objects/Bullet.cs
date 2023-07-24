@@ -47,9 +47,9 @@ namespace _Root.Scripts.Objects
                 gate.IncreaseGateStats();
                 gameObject.SetActive(false);
             }
-            if (other.gameObject.TryGetComponent(out BonusDummyController bonusDummy))
+            if (other.gameObject.TryGetComponent(out BonusSoldierPlatform bonusDummy))
             {
-                bonusDummy.GetHit(_damage,transform.position,_fireRate);
+                bonusDummy.GetHit(_fireRate);
                 gameObject.SetActive(false);
             }
 

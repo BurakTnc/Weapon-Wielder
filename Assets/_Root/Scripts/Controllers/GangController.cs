@@ -56,6 +56,10 @@ namespace _Root.Scripts.Controllers
         }
         private void AddNewSoldier(Transform newSoldier)
         {
+            if (_gangSize >=7)
+            {
+                return;
+            }
             var shooterComp = newSoldier.GetComponent<ShooterController>();
             newSoldier.transform.tag = "Gang";
             newSoldier.SetParent(transform);
