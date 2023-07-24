@@ -337,6 +337,7 @@ namespace _Root.Scripts.Controllers
             
             dragController.LeaveGridByMerge();
             MergeLevelUp();
+            GangController.Instance.EliminateSoldier();
             Destroy(takenSoldier);
         }
 
