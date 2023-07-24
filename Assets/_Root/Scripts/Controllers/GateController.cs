@@ -111,7 +111,7 @@ namespace _Root.Scripts.Controllers
                 case GateMode.Range:
                     var signRange = Mathf.Sign(range) > 0 ? "+" : "";
                     headlineText.text = "RANGE";
-                    gateText.text = signRange + range.ToString("0");
+                    gateText.text = signRange + (range*10).ToString("0");
                     break;
                 case GateMode.LevelUp:
                     break;
