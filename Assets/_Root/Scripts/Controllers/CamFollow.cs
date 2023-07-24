@@ -54,6 +54,7 @@ namespace _Root.Scripts.Controllers
 
        private void GoToMergePosition(Vector3 desiredPosition)
        {
+           desiredPosition.x = 0;
            _isNeutral = true;
            transform.DOMove(desiredPosition, 2).SetEase(Ease.InSine);
            transform.DORotate(onMergeRotation, 2).SetEase(Ease.InSine);
