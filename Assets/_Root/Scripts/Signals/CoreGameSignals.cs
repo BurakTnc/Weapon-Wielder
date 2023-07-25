@@ -11,6 +11,7 @@ namespace _Root.Scripts.Signals
         public UnityAction OnGameStart = delegate { };
         public UnityAction OnLevelComplete = delegate { };
         public UnityAction OnLevelLoad = delegate { };
+        public UnityAction OnSave = delegate { };
 
         private void Awake()
         {

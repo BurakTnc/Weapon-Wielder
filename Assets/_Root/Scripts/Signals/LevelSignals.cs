@@ -18,6 +18,7 @@ namespace _Root.Scripts.Signals
         public UnityAction OnFight = delegate { };
         public UnityAction OnBuySoldier = delegate { };
         public UnityAction OnEnemyKilled = delegate { };
+        public UnityAction OnUpgrade = delegate { };
 
         private void Awake()
         {

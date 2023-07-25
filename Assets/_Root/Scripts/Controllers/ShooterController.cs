@@ -66,6 +66,7 @@ namespace _Root.Scripts.Controllers
             LevelSignals.Instance.OnStop -= OnGameEnd;
             LevelSignals.Instance.OnFight -= Fight;
             LevelSignals.Instance.OnFight -= RotationFix;
+            LevelSignals.Instance.OnUpgrade -= GetData;
         }
 
         private void Subscribe()
@@ -76,17 +77,23 @@ namespace _Root.Scripts.Controllers
             LevelSignals.Instance.OnStop += OnGameEnd;
             LevelSignals.Instance.OnFight += Fight;
             LevelSignals.Instance.OnFight += RotationFix;
+            LevelSignals.Instance.OnUpgrade += GetData;
         }
 
         private void Start()
         {
-            _fireRate = soldierData[0].fireRate;
-            _range = soldierData[0].range;
-            _damage = soldierData[0].damage;
-            
+            GetData();
+
             if (isCollectible)
                 return;
             ChangeSoldierState(SoldierState.Idle);
+        }
+
+        private void GetData()
+        {
+            _fireRate = soldierData[0].fireRate;
+            _range = soldierData[0].range;
+            _damage = soldierData[0].damage;
         }
 
         private void Update()

@@ -1,6 +1,7 @@
 using System;
 using _Root.Scripts.Signals;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ namespace _Root.Scripts.Managers
 
         [SerializeField] private GameObject gamePanel, startPanel, winPanel, mergePanel, fightPanel;
         [SerializeField] private Image xpBar;
+        [SerializeField] private TextMeshProUGUI[] moneyTexts;
+        [SerializeField] public TextMeshProUGUI earnedMoneyText;
 
         private void Awake()
         {
@@ -22,6 +25,11 @@ namespace _Root.Scripts.Managers
             }
 
             Instance = this;
+        }
+
+        private void Start()
+        {
+            SetMoneyTexts();
         }
 
         private void OnEnable()
@@ -37,19 +45,38 @@ namespace _Root.Scripts.Managers
         private void UnSubscribe()
         {
             CoreGameSignals.Instance.OnLevelComplete -= Completed;
+            CoreGameSignals.Instance.OnSave -= SetMoneyTexts;
             LevelSignals.Instance.OnStop -= Merge;
         }
 
         private void Subscribe()
         {
             CoreGameSignals.Instance.OnLevelComplete += Completed;
+            CoreGameSignals.Instance.OnSave += SetMoneyTexts;
             LevelSignals.Instance.OnStop += Merge;
         }
 
+        private void SetMoneyTexts()
+        {
+            var currentMoney = GameManager.Instance.money;
+            foreach (var tmp in moneyTexts)
+            {
+                tmp.text = currentMoney.ToString();
+            }
+        }
+
+        private void SetEarnedMoneyText()
+        {
+            var earnedMoney = GameManager.Instance.earnedMoney;
+
+            earnedMoneyText.text = earnedMoney.ToString();
+        }
         private void Completed()
         {
             gamePanel.SetActive(false);
             winPanel.SetActive(true);
+            SetEarnedMoneyText();
+            CoreGameSignals.Instance.OnSave?.Invoke();
         }
 
         private void Merge()
