@@ -41799,7 +41799,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1514998593}
   m_LocalRotation: {x: -0.99998933, y: -0, z: -0, w: -0.0046212375}
-  m_LocalPosition: {x: 0, y: 0, z: -4.92}
+  m_LocalPosition: {x: 0, y: -0.03, z: -7.67}
   m_LocalScale: {x: 5, y: 0.01, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46628,8 +46628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc18a9ff424c4133887864363a739a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedSideways: 2000
-  speedForward: 8000
+  speedSideways: 2500
+  speedForward: 12500
   xPosClamp: 4
   minZPosClamp: 125
   maxZPosClamp: 170
@@ -48302,7 +48302,7 @@ MonoBehaviour:
   spawnCoolDown: 0.55
   xSpawnClamp: 4
   zSpawnPos: 180
-  enemyCount: 15
+  enemyCount: 8
 --- !u!1 &1757310693
 GameObject:
   m_ObjectHideFlags: 0
@@ -49830,7 +49830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5269905851747157440, guid: 3fdffb388af1443e88b92231eae92cc3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.75
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 5269905851747157440, guid: 3fdffb388af1443e88b92231eae92cc3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -58707,10 +58707,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4231737454042565488, guid: 3fdffb388af1443e88b92231eae92cc3, type: 3}
-      propertyPath: decentMultiplier
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 4785540659296870266, guid: 3fdffb388af1443e88b92231eae92cc3, type: 3}
       propertyPath: m_Name
       value: SoldierBonus
@@ -58725,7 +58721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5269905851747157440, guid: 3fdffb388af1443e88b92231eae92cc3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.75
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 5269905851747157440, guid: 3fdffb388af1443e88b92231eae92cc3, type: 3}
       propertyPath: m_LocalPosition.z

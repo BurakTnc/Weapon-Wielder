@@ -27,7 +27,7 @@ namespace _Root.Scripts.Controllers
             transform.DOShakeScale(shakeLength, new Vector3(.1f,0,.1f), 10, 100);
             transform.position -= Vector3.up * decentMultiplier;
             
-            if(transform.position.y>-1.9f)
+            if(transform.position.y>-1.6f)
                 return;
             SetFreeTheSoldier();
         }
