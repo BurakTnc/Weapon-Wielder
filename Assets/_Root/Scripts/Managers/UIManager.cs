@@ -14,7 +14,10 @@ namespace _Root.Scripts.Managers
         [SerializeField] private GameObject gamePanel, startPanel, winPanel, mergePanel, fightPanel;
         [SerializeField] private Image xpBar;
         [SerializeField] private TextMeshProUGUI[] moneyTexts;
-        [SerializeField] public TextMeshProUGUI earnedMoneyText;
+        [SerializeField] private TextMeshProUGUI earnedMoneyText;
+        [SerializeField] private GameObject mergeTutorial;
+
+        private int _tutorialSeen;
 
         private void Awake()
         {
@@ -25,6 +28,7 @@ namespace _Root.Scripts.Managers
             }
 
             Instance = this;
+            _tutorialSeen = PlayerPrefs.GetInt("tutorialSeen", 0);
         }
 
         private void Start()
@@ -82,6 +86,13 @@ namespace _Root.Scripts.Managers
         private void Merge()
         {
             mergePanel.SetActive(true);
+            PlayerPrefs.SetInt("tutorialSeen",1);
+            if (_tutorialSeen == 0) 
+            {
+                if(!mergeTutorial)
+                    return;
+                mergeTutorial.SetActive(true);
+            }
         }
         public void UpdateXp(int xp)
         {
@@ -93,17 +104,20 @@ namespace _Root.Scripts.Managers
             startPanel.SetActive(false);
             gamePanel.SetActive(true);
             CoreGameSignals.Instance.OnGameStart?.Invoke();
+            HapticManager.Instance.PlaySelectionHaptic();
         }
 
         public void NextLevelButton()
         {
             CoreGameSignals.Instance.OnLevelLoad?.Invoke();
+            HapticManager.Instance.PlaySelectionHaptic();
         }
 
         public void FightButton()
         {
             mergePanel.SetActive(false);
             LevelSignals.Instance.OnFight?.Invoke();
+            HapticManager.Instance.PlaySelectionHaptic();
         }
 
         public void BuySoldierButton()

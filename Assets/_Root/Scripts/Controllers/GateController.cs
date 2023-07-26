@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using _Root.Scripts.Enums;
+using _Root.Scripts.Managers;
 using _Root.Scripts.Signals;
 using DG.Tweening;
 using TMPro;
@@ -64,6 +65,7 @@ namespace _Root.Scripts.Controllers
         public void Selection(ShooterController shooterController)
         {
             _isLocked = true;
+            HapticManager.Instance.PlayRigidHaptic();
             switch (gateMode)
             {
                 case GateMode.FireRate:

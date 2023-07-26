@@ -46,6 +46,10 @@ namespace _Root.Scripts.Managers
             LevelSignals.Instance.OnEnemyKilled -= IncreaseEarnedMoney;
         }
 
+        private void InitializeLevel()
+        {
+            
+        }
         private void Save()
         {
             PlayerPrefs.SetInt("money",money);

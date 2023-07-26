@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using _Root.Scripts.Managers;
 using _Root.Scripts.Signals;
 using UnityEngine;
 
@@ -71,6 +72,7 @@ namespace _Root.Scripts.Controllers
                 {
                     _pos1 = GetMousePosition();
                     _holding = true;
+                    HapticManager.Instance.PlaySoftHaptic();
                 }
 
                 if (Input.GetMouseButton(0) && _holding)

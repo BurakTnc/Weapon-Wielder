@@ -111,6 +111,7 @@ namespace _Root.Scripts.Controllers
             }
             Save();
             CoreGameSignals.Instance.OnSave?.Invoke();
+            HapticManager.Instance.PlaySelectionHaptic();
         }
 
         public void FireRateButton()
@@ -125,6 +126,7 @@ namespace _Root.Scripts.Controllers
             }
             Save();
             CoreGameSignals.Instance.OnSave?.Invoke();
+            HapticManager.Instance.PlaySelectionHaptic();
         }
 
         public void RangeButton()
@@ -139,6 +141,7 @@ namespace _Root.Scripts.Controllers
             }
             Save();
             CoreGameSignals.Instance.OnSave?.Invoke();
+            HapticManager.Instance.PlaySelectionHaptic();
         }
 
         public void AddSoldierButton()
@@ -147,6 +150,7 @@ namespace _Root.Scripts.Controllers
             _addSoldierLevel++;
             Save();
             CoreGameSignals.Instance.OnSave?.Invoke();
+            HapticManager.Instance.PlaySelectionHaptic();
         }
     }
 }

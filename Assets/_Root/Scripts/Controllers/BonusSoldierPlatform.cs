@@ -41,7 +41,7 @@ namespace _Root.Scripts.Controllers
             _soldier.SetParent(null);
             _soldier.transform.localScale = Vector3.one;
             _collider.enabled = false;
-            _renderer.material.DOColor(activationMaterial.color, .25f).SetEase(Ease.OutBack);
+            _renderer.material.DOColor(activationMaterial.color, .5f).SetEase(Ease.InSine);
             // Destroy(gameObject);
         }
     }

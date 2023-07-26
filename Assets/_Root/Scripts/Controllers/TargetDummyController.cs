@@ -82,6 +82,7 @@ namespace _Root.Scripts.Controllers
             if(_hasExploded)
                 return;
 
+            HapticManager.Instance.PlayWarningHaptic();
             _hasExploded = true;
             var partsCount = transform.childCount;
             

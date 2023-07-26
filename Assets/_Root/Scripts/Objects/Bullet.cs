@@ -44,6 +44,7 @@ namespace _Root.Scripts.Objects
                 dummy.GetHit(_damage,transform.position,_fireRate);
                 var particle = PoolManager.Instance.GetPooledObject(PooledObjectType.HitParticle);
                 particle.transform.position = transform.position;
+                HapticManager.Instance.PlayRigidHaptic();
                 gameObject.SetActive(false);
             }
 
@@ -52,6 +53,7 @@ namespace _Root.Scripts.Objects
                 gate.IncreaseGateStats();
                 var particle = PoolManager.Instance.GetPooledObject(PooledObjectType.HitParticle);
                 particle.transform.position = transform.position;
+                HapticManager.Instance.PlaySelectionHaptic();
                 gameObject.SetActive(false);
             }
             if (other.gameObject.TryGetComponent(out BonusSoldierPlatform bonusDummy))
@@ -59,6 +61,7 @@ namespace _Root.Scripts.Objects
                 bonusDummy.GetHit(_fireRate);
                 var particle = PoolManager.Instance.GetPooledObject(PooledObjectType.HitParticle);
                 particle.transform.position = transform.position;
+                HapticManager.Instance.PlayLightHaptic();
                 gameObject.SetActive(false);
             }
 
@@ -67,6 +70,7 @@ namespace _Root.Scripts.Objects
                 if(isEnemy)
                     return;
                 enemy.GetHit(_damage,transform.position);
+                HapticManager.Instance.PlaySelectionHaptic();
                 gameObject.SetActive(false);
             }
             if (other.gameObject.TryGetComponent(out ShooterHealthController shooter))
