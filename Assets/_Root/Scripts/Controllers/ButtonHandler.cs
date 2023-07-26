@@ -105,15 +105,24 @@ namespace _Root.Scripts.Controllers
             soldierData.damage += 1;
             GameManager.Instance.money -= damagePrice[_damageLevel];
             _damageLevel++;
+            if (_damageLevel >20)
+            {
+                _damageLevel = 20;
+            }
             Save();
+            CoreGameSignals.Instance.OnSave?.Invoke();
         }
 
         public void FireRateButton()
         {
-            soldierData.fireRate -= 0.1f;
+            soldierData.fireRate -= 0.015f;
             LevelSignals.Instance.OnUpgrade?.Invoke();
             GameManager.Instance.money -= fireRatePrice[_fireRateLevel];
             _fireRateLevel++;
+            if (_fireRateLevel >20)
+            {
+                _fireRateLevel = 20;
+            }
             Save();
             CoreGameSignals.Instance.OnSave?.Invoke();
         }
@@ -124,6 +133,10 @@ namespace _Root.Scripts.Controllers
             LevelSignals.Instance.OnUpgrade?.Invoke();
             GameManager.Instance.money -= damagePrice[_damageLevel];
             _damageLevel++;
+            if (_rangeLevel >20)
+            {
+                _rangeLevel = 20;
+            }
             Save();
             CoreGameSignals.Instance.OnSave?.Invoke();
         }

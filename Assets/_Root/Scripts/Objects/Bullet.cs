@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using _Root.Scripts.Controllers;
+using _Root.Scripts.Enums;
+using _Root.Scripts.Managers;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -25,6 +27,7 @@ namespace _Root.Scripts.Objects
             _damage = damage;
             _fireRate = fireRate;
             //Debug.Log("FR: " + _fireRate + " DMG: " + _damage + " RNF: " + range);
+            Debug.Log(speed);
             StartCoroutine(KillTheBullet(range));
         }
 
@@ -39,17 +42,23 @@ namespace _Root.Scripts.Objects
             if (other.gameObject.TryGetComponent(out TargetDummyController dummy))
             {
                 dummy.GetHit(_damage,transform.position,_fireRate);
+                var particle = PoolManager.Instance.GetPooledObject(PooledObjectType.HitParticle);
+                particle.transform.position = transform.position;
                 gameObject.SetActive(false);
             }
 
             if (other.gameObject.TryGetComponent(out GateController gate))
             {
                 gate.IncreaseGateStats();
+                var particle = PoolManager.Instance.GetPooledObject(PooledObjectType.HitParticle);
+                particle.transform.position = transform.position;
                 gameObject.SetActive(false);
             }
             if (other.gameObject.TryGetComponent(out BonusSoldierPlatform bonusDummy))
             {
                 bonusDummy.GetHit(_fireRate);
+                var particle = PoolManager.Instance.GetPooledObject(PooledObjectType.HitParticle);
+                particle.transform.position = transform.position;
                 gameObject.SetActive(false);
             }
 

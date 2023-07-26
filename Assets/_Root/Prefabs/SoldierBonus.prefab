@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   decentMultiplier: 0.25
+  activationMaterial: {fileID: 2100000, guid: 6359f7cbdbf887c4ab0070471222e2b7, type: 2}
 --- !u!1001 &5697763254096020946
 PrefabInstance:
   m_ObjectHideFlags: 0

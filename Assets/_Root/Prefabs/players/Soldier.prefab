@@ -6842,6 +6842,7 @@ MonoBehaviour:
   isCollectible: 0
   level1Mat: {fileID: 2100000, guid: 3c047c3ab762e21429ad5b44e830a18c, type: 2}
   meshRenderer: {fileID: 410663265153367122}
+  levelUpEffect: {fileID: 105942, guid: ff672eaca96d32c419d7a1f1b0346e8d, type: 3}
 --- !u!114 &1490997628
 MonoBehaviour:
   m_ObjectHideFlags: 0

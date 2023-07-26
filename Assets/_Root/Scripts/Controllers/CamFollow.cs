@@ -11,6 +11,7 @@ namespace _Root.Scripts.Controllers
         public Vector3 offset;
        [SerializeField] private float speed = 0.5f;
        [SerializeField] private Vector3 onMergeRotation, onFightRotation;
+       [SerializeField] private GameObject confetti;
 
        private bool _isNeutral;
 
@@ -29,17 +30,24 @@ namespace _Root.Scripts.Controllers
        {
            CameraSignals.Instance.OnMergeLook += GoToMergePosition;
            CameraSignals.Instance.OnFightLook += GoToFightPosition;
+           CoreGameSignals.Instance.OnLevelComplete += ExplodeConfetti;
        }
 
        private void UnSubscribe()
        {
            CameraSignals.Instance.OnMergeLook -= GoToMergePosition;
            CameraSignals.Instance.OnFightLook -= GoToFightPosition;
+           CoreGameSignals.Instance.OnLevelComplete -= ExplodeConfetti;
        }
        private void Start()
         {
             _target = GameObject.Find("Player").transform;
         }
+
+       private void ExplodeConfetti()
+       {
+           confetti.SetActive(true);
+       }
        private void LateUpdate()
         {
             if(_isNeutral)

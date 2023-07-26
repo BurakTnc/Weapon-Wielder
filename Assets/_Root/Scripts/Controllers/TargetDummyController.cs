@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using _Root.Scripts.Enums;
+using _Root.Scripts.Managers;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -40,12 +42,17 @@ namespace _Root.Scripts.Controllers
             var selectedPart = transform.GetChild(part);
                 
             selectedPart.SetParent(null);
+            var particle = PoolManager.Instance.GetPooledObject(PooledObjectType.DummyParticle);
+            particle.transform.position = selectedPart.transform.position;
+            
             if (part <= 2 && part != 0) 
             {
                 for (var i = 0; i < part; i++)
                 {
                     var prevPiece = transform.GetChild(0);
                     prevPiece.SetParent(null);
+                    var prevParticle = PoolManager.Instance.GetPooledObject(PooledObjectType.DummyParticle);
+                    prevParticle.transform.position = prevPiece.transform.position;
 
                     if (!prevPiece.TryGetComponent(out Rigidbody prevRb))
                         continue;
@@ -65,7 +72,6 @@ namespace _Root.Scripts.Controllers
             if (selectedPart.TryGetComponent(out BoxCollider coll))
             {
                 coll.enabled = true;
-
             }
 
             Destroy(selectedPart.gameObject, 3);
@@ -104,7 +110,6 @@ namespace _Root.Scripts.Controllers
                 }
                 Destroy(selectedPart.gameObject, 3);
             }
-            SpawnThePotion();
             Destroy(gameObject);
         }
 

@@ -23,6 +23,7 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private bool isCollectible;
         [SerializeField] private Material level1Mat;
         [SerializeField] private SkinnedMeshRenderer meshRenderer;
+        [SerializeField] private GameObject levelUpEffect;
         
         private float _fireRate;
         private float _range;
@@ -198,9 +199,11 @@ namespace _Root.Scripts.Controllers
                 if (bullet.gameObject.TryGetComponent(out Bullet firedBullet))
                 {
                     var rawDirection = transform.forward * (0.04f);
-                    var fightingDirection = transform.forward * (0.5f);
+                    var fightingDirection = transform.forward * (0.4f);
+                    fightingDirection.y = 0;
                     var desiredDirection = _isAiming ? fightingDirection : rawDirection;
-                    firedBullet.Fire(desiredDirection, Range, Damage, FireRate);
+                    var desiredRange = _isAiming ? Range/7 : Range;
+                    firedBullet.Fire(desiredDirection, desiredRange, Damage, FireRate);
                     fireEffect.transform.position = shootingPosition.position;
                 }
             }
@@ -287,6 +290,7 @@ namespace _Root.Scripts.Controllers
             var chance = Random.Range(0, 2);
             if(chance>0 || isCollectible)
                 return;
+            levelUpEffect.SetActive(true);
             _healthController.IncreaseHealth();
             FireRate = .05f;
             Damage = 2;
