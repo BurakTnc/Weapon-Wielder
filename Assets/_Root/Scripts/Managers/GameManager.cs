@@ -9,6 +9,9 @@ namespace _Root.Scripts.Managers
         public static GameManager Instance;
         public int money;
         public int earnedMoney;
+        [SerializeField] private GameObject[] levelPrefabs;
+        
+        private int _level;
 
         private void Awake()
         {
@@ -20,6 +23,11 @@ namespace _Root.Scripts.Managers
 
             Instance = this;
             GetValues();
+        }
+
+        private void Start()
+        {
+            InitializeLevel();
         }
 
         private void OnEnable()
@@ -37,6 +45,7 @@ namespace _Root.Scripts.Managers
             CoreGameSignals.Instance.OnSave += Save;
             CoreGameSignals.Instance.OnLevelLoad += ArrangeMoney;
             LevelSignals.Instance.OnEnemyKilled += IncreaseEarnedMoney;
+            CoreGameSignals.Instance.OnLevelComplete += LevelWin;
         }
 
         private void UnSubscribe()
@@ -44,32 +53,44 @@ namespace _Root.Scripts.Managers
             CoreGameSignals.Instance.OnSave -= Save;
             CoreGameSignals.Instance.OnLevelLoad -= ArrangeMoney;
             LevelSignals.Instance.OnEnemyKilled -= IncreaseEarnedMoney;
+            CoreGameSignals.Instance.OnLevelComplete -= LevelWin;
         }
 
         private void InitializeLevel()
         {
-            
+            levelPrefabs[_level].SetActive(true);
         }
         private void Save()
         {
             PlayerPrefs.SetInt("money",money);
+            PlayerPrefs.SetInt("level",_level);
         }
 
         private void GetValues()
         {
             money = PlayerPrefs.GetInt("money", 0);
+            _level = PlayerPrefs.GetInt("level", 0);
         }
 
         private void IncreaseEarnedMoney()
         {
-            earnedMoney += 500;
+            earnedMoney += 10;
         }
 
         private void ArrangeMoney()
         {
             money += earnedMoney;
             Save();
-            Debug.Log(money);
+        }
+
+        private void LevelWin()
+        {
+            _level++;
+            if (_level>4)
+            {
+                _level = 0;
+            }
+            Save();
         }
     }
 }

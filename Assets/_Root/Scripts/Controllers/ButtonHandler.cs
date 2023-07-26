@@ -86,13 +86,13 @@ namespace _Root.Scripts.Controllers
 
         private void UpdateInterface()
         {
-            damageLevelText.text = (_damageLevel + 1).ToString();
+            damageLevelText.text = "lv" + (_damageLevel + 1);
             damagePriceText.text = damagePrice[_damageLevel] + "$";
 
-            fireRateLevelText.text = (_fireRateLevel + 1).ToString();
+            fireRateLevelText.text = "lv" + (_fireRateLevel + 1);
             fireRatePriceText.text = fireRatePrice[_fireRateLevel] + "$";
 
-            rangeLevelText.text = (_rangeLevel + 1).ToString();
+            rangeLevelText.text = "lv" + (_rangeLevel + 1);
             rangePriceText.text = rangePrice[_rangeLevel] + "$";
 
             //addSoldierLevelText.text = (_addSoldierLevel + 1).ToString();
@@ -133,8 +133,8 @@ namespace _Root.Scripts.Controllers
         {
             soldierData.range += 0.2f;
             LevelSignals.Instance.OnUpgrade?.Invoke();
-            GameManager.Instance.money -= damagePrice[_damageLevel];
-            _damageLevel++;
+            GameManager.Instance.money -= rangePrice[_rangeLevel];
+            _rangeLevel++;
             if (_rangeLevel >20)
             {
                 _rangeLevel = 20;

@@ -33,9 +33,27 @@ namespace _Root.Scripts.Controllers
 
         private void Start()
         {
-            UpdateInterface();
+            SetGateVisuals();
         }
 
+        private void SetGateVisuals()
+        {
+            switch (gateMode)
+            {
+                case GateMode.FireRate:
+                    _gateVisuals.SetGateColor(fireRate>=0);
+                    break;
+                case GateMode.Damage:
+                    _gateVisuals.SetGateColor(damage>=0);
+                    break;
+                case GateMode.Range:
+                    _gateVisuals.SetGateColor(range>=0);
+                    break;
+                default:
+                    break;
+            }
+            UpdateInterface();
+        }
         public void IncreaseGateStats()
         {
             if(_isLocked)

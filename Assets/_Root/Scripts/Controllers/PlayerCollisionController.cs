@@ -24,7 +24,7 @@ namespace _Root.Scripts.Controllers
 
             if (other.gameObject.CompareTag("Finish"))
             {
-                var gridController = other.transform.root.GetComponent<GridController>();
+                var gridController = other.transform.parent.GetComponent<GridController>();
                 
                 LevelSignals.Instance.OnGrid?.Invoke(_gangController.GetGangList());
                 LevelSignals.Instance.OnStop?.Invoke();

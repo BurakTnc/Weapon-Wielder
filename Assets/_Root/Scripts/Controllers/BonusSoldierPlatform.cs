@@ -27,7 +27,7 @@ namespace _Root.Scripts.Controllers
         {
             transform.DOKill();
             transform.localScale = _startScale;
-            transform.DOShakeScale(shakeLength, new Vector3(.2f,0,0f), 10, 100,true);
+            transform.DOShakeScale(.2f, new Vector3(.2f,0,0f), 2, 0,true);
             transform.position -= Vector3.up * decentMultiplier;
             
             if(transform.position.y>-1.6f)

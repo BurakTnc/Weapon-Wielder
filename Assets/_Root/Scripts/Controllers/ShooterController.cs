@@ -202,7 +202,7 @@ namespace _Root.Scripts.Controllers
                     var fightingDirection = transform.forward * (0.4f);
                     fightingDirection.y = 0;
                     var desiredDirection = _isAiming ? fightingDirection : rawDirection;
-                    var desiredRange = _isAiming ? Range/7 : Range;
+                    var desiredRange = _isAiming ? Range/4 : Range;
                     firedBullet.Fire(desiredDirection, desiredRange, Damage, FireRate);
                     fireEffect.transform.position = shootingPosition.position;
                 }
