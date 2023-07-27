@@ -198,11 +198,12 @@ namespace _Root.Scripts.Controllers
                 
                 if (bullet.gameObject.TryGetComponent(out Bullet firedBullet))
                 {
-                    var rawDirection = transform.forward * (0.04f);
-                    var fightingDirection = transform.forward * (0.4f);
+                    var rawDirection = transform.forward * (20f);
+                    var fightingDirection = transform.forward * (100f);
                     fightingDirection.y = 0;
                     var desiredDirection = _isAiming ? fightingDirection : rawDirection;
                     var desiredRange = _isAiming ? Range/4 : Range;
+                  
                     firedBullet.Fire(desiredDirection, desiredRange, Damage, FireRate);
                     fireEffect.transform.position = shootingPosition.position;
                 }
@@ -323,6 +324,7 @@ namespace _Root.Scripts.Controllers
             _isAiming = true;
             _isRunning = true;
             ChangeSoldierState(SoldierState.Shoot);
+            Destroy(_dragNDropController);
         }
         public void Activate()
         {

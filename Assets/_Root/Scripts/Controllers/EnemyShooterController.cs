@@ -57,7 +57,7 @@ namespace _Root.Scripts.Controllers
                 
             if (bullet.gameObject.TryGetComponent(out Bullet firedBullet))
             {
-                var fightingDirection = transform.forward * (0.2f);
+                var fightingDirection = transform.forward * (40f);
                 firedBullet.Fire(fightingDirection, range, damage, fireRate);
                 fireEffect.transform.position = shootingPos.position;
             }

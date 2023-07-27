@@ -15,10 +15,16 @@ namespace _Root.Scripts.Objects
         private float _damage;
         private float _fireRate;
         private Vector3 _speed;
+        private Rigidbody _rb;
+
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody>();
+        }
 
         private void Update()
         {
-            transform.position += _speed;
+            //transform.position += _speed;
         }
 
         public void Fire(Vector3 speed,float range,float damage,float fireRate)
@@ -27,7 +33,8 @@ namespace _Root.Scripts.Objects
             _damage = damage;
             _fireRate = fireRate;
             //Debug.Log("FR: " + _fireRate + " DMG: " + _damage + " RNF: " + range);
-            Debug.Log(speed);
+            _rb.velocity = _speed;
+           
             StartCoroutine(KillTheBullet(range));
         }
 

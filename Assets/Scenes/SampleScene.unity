@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.180503, g: 0.22597742, b: 0.3070451, a: 1}
+  m_IndirectSpecularColor: {r: 0.18050298, g: 0.22597735, b: 0.30704513, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6268,6 +6268,10 @@ PrefabInstance:
     - target: {fileID: 585562268178472537, guid: 45b1f2f5b82a24ee4837edbc9aa2c357, type: 3}
       propertyPath: endValueV3.x
       value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 585562268572949153, guid: 45b1f2f5b82a24ee4837edbc9aa2c357, type: 3}
+      propertyPath: xSpawnClamp
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7483970248450201762, guid: 45b1f2f5b82a24ee4837edbc9aa2c357, type: 3}
       propertyPath: m_RootOrder
@@ -14416,6 +14420,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1331563329}
     m_Modifications:
+    - target: {fileID: 1479703778516609555, guid: e6a8cdbfad9b14d88809e7bee3d0208f, type: 3}
+      propertyPath: xSpawnClamp
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7801824900359588871, guid: e6a8cdbfad9b14d88809e7bee3d0208f, type: 3}
       propertyPath: m_Name
       value: Level3
@@ -17543,6 +17551,10 @@ PrefabInstance:
     - target: {fileID: 3972520935159929854, guid: d14ec3226f3184bafbbffb7ee38ccbf9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759095019783896554, guid: d14ec3226f3184bafbbffb7ee38ccbf9, type: 3}
+      propertyPath: xSpawnClamp
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5759095020447562002, guid: d14ec3226f3184bafbbffb7ee38ccbf9, type: 3}
       propertyPath: endValueV3.x
@@ -28866,6 +28878,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1331563329}
     m_Modifications:
+    - target: {fileID: 2031230001262839142, guid: ef01641eb62a547a6a6244b4e1ee924c, type: 3}
+      propertyPath: xSpawnClamp
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7277025600858055538, guid: ef01641eb62a547a6a6244b4e1ee924c, type: 3}
       propertyPath: m_Name
       value: Level1
@@ -34173,6 +34189,10 @@ PrefabInstance:
     - target: {fileID: 4551189434182963311, guid: 65411a57a6c3646a6bac22960a44dfb2, type: 3}
       propertyPath: endValueV3.x
       value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4551189434576622743, guid: 65411a57a6c3646a6bac22960a44dfb2, type: 3}
+      propertyPath: xSpawnClamp
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5180338569100751491, guid: 65411a57a6c3646a6bac22960a44dfb2, type: 3}
       propertyPath: m_Name
@@ -45835,8 +45855,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedSideways: 2500
   speedForward: 12500
-  xPosClamp: 4
-  minZPosClamp: 115
+  xPosClamp: 2
+  minZPosClamp: 122
   maxZPosClamp: 170
 --- !u!4 &1689997230
 Transform:
@@ -45846,7 +45866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689997228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 140.03}
+  m_LocalPosition: {x: 0, y: 0, z: 122}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -51893,7 +51913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xPosClamp: 2
-  speedSideways: 2000
+  speedSideways: 500
   speed: 3
 --- !u!136 &1923111352
 CapsuleCollider:

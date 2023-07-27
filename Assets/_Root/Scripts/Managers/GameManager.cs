@@ -58,6 +58,7 @@ namespace _Root.Scripts.Managers
 
         private void InitializeLevel()
         {
+            Application.targetFrameRate = 60;
             levelPrefabs[_level].SetActive(true);
         }
         private void Save()
