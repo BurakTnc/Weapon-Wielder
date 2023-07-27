@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2310444352594149353
 Transform:
   m_ObjectHideFlags: 0
@@ -74,7 +74,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5759095020078658158}
   m_LocalRotation: {x: -0.99998933, y: -0, z: -0, w: -0.0046212375}
-  m_LocalPosition: {x: 0, y: -0.03, z: -7.67}
+  m_LocalPosition: {x: 0, y: -0.03, z: 9.51}
   m_LocalScale: {x: 5, y: 0.01, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1434,7 +1434,7 @@ MonoBehaviour:
   spawnCoolDown: 0.55
   xSpawnClamp: 4
   zSpawnPos: 180
-  enemyCount: 9
+  enemyCount: 8
 --- !u!4 &519992949971835082 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5249799400336231838, guid: d109869e9121c486483dfab0076a7c50, type: 3}

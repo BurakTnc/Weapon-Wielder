@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031230001492364002}
   m_LocalRotation: {x: -0.99998933, y: -0, z: -0, w: -0.0046212375}
-  m_LocalPosition: {x: 0, y: -0.03, z: -7.67}
+  m_LocalPosition: {x: 0, y: -0.03, z: 9.51}
   m_LocalScale: {x: 5, y: 0.01, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -313,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784046750481102566, guid: cde938e16bee3428da4d66a63772b10f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 784046750481102566, guid: cde938e16bee3428da4d66a63772b10f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -629,7 +629,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4231737454042565488, guid: 3fdffb388af1443e88b92231eae92cc3, type: 3}
       propertyPath: decentMultiplier
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4785540659296870266, guid: 3fdffb388af1443e88b92231eae92cc3, type: 3}
       propertyPath: m_Name
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   spawnCoolDown: 0.55
   xSpawnClamp: 4
   zSpawnPos: 180
-  enemyCount: 6
+  enemyCount: 5
 --- !u!4 &6119099219826812981 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5249799400475624941, guid: d109869e9121c486483dfab0076a7c50, type: 3}
@@ -1731,7 +1731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784046750481102566, guid: cde938e16bee3428da4d66a63772b10f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.05
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 784046750481102566, guid: cde938e16bee3428da4d66a63772b10f, type: 3}
       propertyPath: m_LocalPosition.y
